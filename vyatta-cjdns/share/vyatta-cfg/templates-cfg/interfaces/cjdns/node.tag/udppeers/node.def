@@ -1,0 +1,8 @@
+tag:
+type: txt
+help: Peer address in Host:Port notation, either by IPv4 address or hostname
+val_help: txt; Peer address
+
+create: /opt/vyatta/sbin/vyatta-cjdns-updateconf $VAR(../@) addUDPConnectTo $VAR(@)
+update: /opt/vyatta/sbin/vyatta-cjdns-updateconf $VAR(../@) addUDPConnectTo $VAR(@)
+delete: /opt/vyatta/sbin/vyatta-cjdns-updateconf $VAR(../@) deleteUDPConnectTo $VAR(@)

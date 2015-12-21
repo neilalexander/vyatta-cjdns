@@ -1,0 +1,5 @@
+#!/bin/sh
+
+echo "cjdns delete conf: $1"
+
+rm -f /config/cjdroute.$1.conf

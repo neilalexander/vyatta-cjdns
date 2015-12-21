@@ -1,0 +1,36 @@
+This package was debianized by Neil Alexander
+<neilalexander@users.noreply.github.com> on Sat 19th Dec 2015.
+
+It's original content from the GIT repository
+   <https://github.com/neilalexander/vyatta-cjdns>
+
+Upstream Author:
+
+    <neilalexander@users.noreply.github.com>
+
+Copyright:
+
+    Copyright (C) 2013 SO3 Group, Inc.
+    All Rights Reserved.
+
+License:
+
+This program is free software; you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation; either version 2, or (at your option)
+any later version.
+
+This program is distributed in the hope that it will be useful, but
+WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+General Public License for more details.
+
+A copy of the GNU General Public License is available as
+`/usr/share/common-licenses/GPL' in the Debian GNU/Linux distribution
+or on the World Wide Web at `http://www.gnu.org/copyleft/gpl.html'.
+You can also obtain it by writing to the Free Software Foundation,
+Free Software Foundation, Inc., 51 Franklin St, Fifth Floor, Boston,
+MA 02110-1301, USA.
+
+The Debian packaging is (C) 2013, Daniil Baturin <daniil@baturin.org> and
+is licensed under the GPL, see above.
