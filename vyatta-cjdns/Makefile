@@ -15,11 +15,11 @@ LDFLAGS:=$(shell dpkg-buildflags --get LDFLAGS)
 
 all: clean build package cleanpackage
 
-build: cjdnsclone cjdnsstage
+build: cjdnsclone cjdnsbuild cjdnsstage
 
 package:
 	tar czvf ../data.tar.gz sbin share
-	tar czvf ../control.tar.gz debian/*
+	cd debian && tar czvf ../../control.tar.gz *
 	echo 2.0 > ../debian-binary
 	ar -r ../$(PACKAGE).deb ../debian-binary ../control.tar.gz ../data.tar.gz
 

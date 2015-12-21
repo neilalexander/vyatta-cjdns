@@ -1,16 +1,10 @@
-Source: vyatta-cjdns
+Package: vyatta-cjdns
+Version: 0.1-1
 Section: contrib/net
 Priority: extra
-Maintainer: Neil Alexander <neilalexander@users.noreply.github.com>
-Standards-Version: 0.1
-Build-Depends: debhelper (>= 9), crossbuild-essential-mipsel
-
-Package: vyatta-cjdns
 Architecture: mips
-Depends: vyatta-cfg-system,
- vyatta-cfg,
- vyatta-op,
- ${misc:Depends}
+Depends: vyatta-cfg-system, vyatta-cfg, vyatta-op
 Replaces: vyatta-cjdns
 Description: Vyatta cjdns package
- Vyatta cjdns package
+ Binary cjdns package for MIPS-based Vyatta platforms
+ such as the Ubiquiti EdgeRouter X
