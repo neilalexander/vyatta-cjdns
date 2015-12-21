@@ -3,6 +3,7 @@ Version: 0.1-1
 Section: contrib/net
 Priority: extra
 Architecture: mipsel
+Maintainer: Neil Alexander <neilalexander@noreply.users.github.com>
 Depends: vyatta-cfg-system, vyatta-cfg, vyatta-op
 Replaces: vyatta-cjdns
 Description: Vyatta cjdns package
