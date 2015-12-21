@@ -18,7 +18,7 @@ all: clean build package cleanpackage
 build: cjdnsclone cjdnsbuild cjdnsstage
 
 package:
-	tar czvf ../data.tar.gz sbin share
+	tar czvf ../data.tar.gz opt
 	cd debian && tar czvf ../../control.tar.gz *
 	echo 2.0 > ../debian-binary
 	ar -r ../$(PACKAGE).deb ../debian-binary ../control.tar.gz ../data.tar.gz
