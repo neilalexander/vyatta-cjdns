@@ -2,7 +2,7 @@ Package: vyatta-cjdns
 Version: 0.1-1
 Section: contrib/net
 Priority: extra
-Architecture: mips
+Architecture: mipsel
 Depends: vyatta-cfg-system, vyatta-cfg, vyatta-op
 Replaces: vyatta-cjdns
 Description: Vyatta cjdns package
