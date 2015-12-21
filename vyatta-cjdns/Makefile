@@ -35,7 +35,7 @@ cjdnsclone:
 	touch /tmp/cjdns/cjdroute
 
 cjdnsbuild:
-	cd $(BUILDDIR_CJD) && TARGET_ARCH='mips' CROSS_COMPILE=$(PREFIX) Seccomp_NO=1 ./cross-do
+	cd $(BUILDDIR_CJD) && TARGET_ARCH='mips' CROSS_COMPILE=$(PREFIX) CROSS_CFLAGS="-mips32r2" Seccomp_NO=1 ./cross-do
 
 cjdnsstage:
 	cp $(BUILDDIR_CJD)/cjdroute opt/vyatta/sbin/cjdroute
