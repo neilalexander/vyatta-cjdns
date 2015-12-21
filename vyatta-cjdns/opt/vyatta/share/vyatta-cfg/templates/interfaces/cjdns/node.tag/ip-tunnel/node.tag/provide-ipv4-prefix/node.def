@@ -1,0 +1,6 @@
+type: ipv4net
+help: Provide IPv4 prefix to remote client
+val_help: ipv4net; IPv4 prefix to provide to remote client
+
+create: /opt/vyatta/sbin/vyatta-cjdns-updateconf $VAR(../../@) addIpTunnelProviderIPv4Prefix $VAR(../@) $VAR(@)
+delete: /opt/vyatta/sbin/vyatta-cjdns-updateconf $VAR(../../@) deleteIpTunnelProviderIPv4Prefix $VAR(../@)
