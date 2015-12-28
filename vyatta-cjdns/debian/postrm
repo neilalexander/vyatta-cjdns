@@ -1,0 +1,6 @@
+#!/bin/sh
+
+rm -rf /opt/vyatta/share/vyatta-cfg/templates-cfg/interfaces/cjdns/
+rm -rf /opt/vyatta/share/vyatta-op/templates-op/show/cjdns/
+rm -rf /opt/vyatta/sbin/vyatta-cjdns*
+rm -f /opt/vyatta/sbin/vyatta-restart-cjdns
