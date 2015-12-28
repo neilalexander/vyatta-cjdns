@@ -36,7 +36,7 @@ cjdnsbuild:
 	cd $(BUILDDIR_CJD) && TARGET_ARCH='mips' CROSS_COMPILE='mipsel-linux-gnu-' Seccomp_NO=1 ./cross-do
 
 cjdnsstage:
-	cp $(BUILDDIR_CJD)/cjdroute sbin/cjdroute
+	cp $(BUILDDIR_CJD)/cjdroute opt/vyatta/sbin/cjdroute
 
 clean:
 	rm -rf sbin/cjdroute
