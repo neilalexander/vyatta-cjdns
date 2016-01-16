@@ -1,7 +1,7 @@
 #!/usr/bin/python
 
 import json
-import sys
+import sys, os
 
 data = {}
 
@@ -10,7 +10,7 @@ with open('cjdroute.' + sys.argv[1] + '.conf') as data_file:
 
 def setStandardConfiguration():
     data['logging']['logTo'] = "stdout"
-    data['noBackground'] = 1
+    data['noBackground'] = 0
     data['security']['exemptAngel'] = 1
 
 def addAuthorizedPassword(password):
@@ -79,5 +79,7 @@ try:
 except IndexError:
     print "Incorrect number of parameters supplied"
 finally:
+    setStandardConfiguration()
     with open('cjdroute.' + sys.argv[1] + '.conf', 'w') as outfile:
         json.dump(data, outfile, indent=4)
+    os.system("/opt/vyatta/sbin/vyatta-restart-cjdns")

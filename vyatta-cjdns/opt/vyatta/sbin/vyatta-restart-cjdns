@@ -1,1 +1,8 @@
 #!/bin/sh
+
+pgrep cjdroute | xargs kill 2&>1
+
+ls cjdroute.*.conf | awk -v FS="(cjdroute.|.conf)" '{print $2}' | while read file;
+do
+    /opt/vyatta/sbin/cjdroute < /config/cjdroute.$file.conf;
+done

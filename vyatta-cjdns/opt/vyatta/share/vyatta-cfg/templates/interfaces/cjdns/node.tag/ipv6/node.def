@@ -1,6 +1,6 @@
 type: ipv6
 help: cjdns IPv6 address
-val_help: txt; cjdns IPv6 address
+val_help: ipv6; cjdns IPv6 address
 
 create: /opt/vyatta/sbin/vyatta-cjdns-updateconf $VAR(../@) updateIPv6Address $VAR(@)
 update: /opt/vyatta/sbin/vyatta-cjdns-updateconf $VAR(../@) updateIPv6Address $VAR(@)
