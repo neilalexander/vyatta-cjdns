@@ -3,3 +3,4 @@
 echo "cjdns generate conf: $1"
 
 /opt/vyatta/sbin/cjdroute --genconf | /opt/vyatta/sbin/cjdroute --cleanconf > /config/cjdroute.$1.conf
+/opt/vyatta/sbin/vyatta-cjdns-updateconf $1 setStandardConfiguration
