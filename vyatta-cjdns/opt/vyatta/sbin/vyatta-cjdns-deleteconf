@@ -3,3 +3,7 @@
 echo "cjdns delete conf: $1"
 
 rm -f /config/cjdroute.$1.conf
+
+echo -n "Stopping cjdns interface $1... "
+pgrep cjdroute.$1.conf | xargs kill 2&>1
+if [ $? -eq 0 ]; then echo "OK."; else echo "failed."; fi
