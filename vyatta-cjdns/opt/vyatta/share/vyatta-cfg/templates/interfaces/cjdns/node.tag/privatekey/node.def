@@ -4,3 +4,4 @@ val_help: txt; Private key
 
 create: /opt/vyatta/sbin/vyatta-cjdns-updateconf $VAR(../@) updatePrivateKey $VAR(@)
 update: /opt/vyatta/sbin/vyatta-cjdns-updateconf $VAR(../@) updatePrivateKey $VAR(@)
+end: /opt/vyatta/sbin/vyatta-restart-cjdns $VAR(../@)

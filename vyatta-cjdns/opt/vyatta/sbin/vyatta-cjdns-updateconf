@@ -1,7 +1,7 @@
 #!/usr/bin/python
 
 import json
-import sys, os
+import sys
 
 data = {}
 
@@ -81,4 +81,3 @@ finally:
     setStandardConfiguration()
     with open('/config/cjdroute.' + sys.argv[1] + '.conf', 'w') as outfile:
         json.dump(data, outfile, indent=4)
-    os.system("/opt/vyatta/sbin/vyatta-restart-cjdns " + sys.argv[1])
