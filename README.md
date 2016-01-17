@@ -2,7 +2,7 @@
 
 ### Introduction
 
-This is a cjdns distributable package for Ubiquiti EdgeOS or Vyatta-based platforms such as VyOS. It supports configuration through the standard Vyatta configuration editor and should therefore be very straight-forward to deploy.
+This is a cjdns distributable package for Ubiquiti EdgeOS. It supports configuration through the standard configuration editor and should therefore be very straight-forward to deploy.
 
 At this time this package is in very early stages of development, but the ultimate aim is to provide binary builds for some commonly-used platforms with pre-built cjdns binaries.
 
@@ -48,4 +48,12 @@ set interfaces cjdns tun0 publickey xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
 set interfaces cjdns tun0 privatekey xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
 set interfaces cjdns tun0 ipv6 xxxx:xxxx:xxxx:xxxx:xxxx:xxxx:xxxx:xxxx
 commit
+```
+To see information about peerings, in operational view:
+```
+show interfaces cjdns peers
+```
+To see your IPv6 address and public/private keys, in operational view:
+```
+show interfaces cjdns identity
 ```

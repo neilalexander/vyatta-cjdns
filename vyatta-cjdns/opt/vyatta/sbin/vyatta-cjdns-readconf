@@ -16,10 +16,16 @@ def getPrivateKey(privateKey):
 
 def getIPv6Address(address):
     print data['ipv6']
+ 
+def showIdentity()
+    print "IPv6 address: " + getIPv6Address()
+    print "Public key: " + getPublicKey()
+    print "Private key: " + getPrivateKey()
 
 try:
     if sys.argv[2] == "getPublicKey": getPublicKey(sys.argv[2])
     if sys.argv[2] == "getPrivateKey": getPrivateKey(sys.argv[2])
     if sys.argv[2] == "getIPv6Address": getIPv6Address(sys.argv[2])
+    if sys.argv[2] == "showIdentity": showIdentity()
 except IndexError:
     print "Incorrect number of parameters supplied"
