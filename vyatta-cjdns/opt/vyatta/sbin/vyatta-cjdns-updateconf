@@ -26,9 +26,9 @@ def updateAuthorizedPassword(user, password):
             data['authorizedPasswords'][i]['password'] = password
 
 def deleteAuthorizedPassword(user, password):
-    data['authorizedPasswords'].remove(
-        { "user": user, "password": password }
-    )
+    for i in range(len(data['authorizedPasswords'])):
+        if data['authorizedPasswords'][i]['user'] == user:
+            del data['authorizedPasswords'][i]
 
 def addUDPInterface(interface):
     if int(interface) > len(data['interfaces']['UDPInterface']):
