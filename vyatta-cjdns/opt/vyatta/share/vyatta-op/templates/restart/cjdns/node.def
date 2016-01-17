@@ -1,2 +1,2 @@
 help: Restart the specified cjdns interface
-allowed: echo "Interface name (i.e. tun0)"
+allowed: echo "interface"
