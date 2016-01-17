@@ -13,7 +13,7 @@ def setStandardConfiguration():
     data['noBackground'] = 1
     data['interfaces']['UDPInterface'] = []
     data['interfaces']['ETHInterface'] = []
-    data['interfaces']['authorisedPasswords'] = []
+    data['authorisedPasswords'] = []
 
 def addAuthorizedPassword(user, password):
     data['authorizedPasswords'].append(
@@ -125,9 +125,9 @@ try:
     if sys.argv[2] == "addUDPInterface": addUDPInterface(sys.argv[3])
     if sys.argv[2] == "deleteUDPInterface": deleteUDPInterface(sys.argv[3])
     if sys.argv[2] == "addUDPConnectTo": addUDPConnectTo(sys.argv[3], sys.argv[4])
+    if sys.argv[2] == "deleteUDPConnectTo": deleteUDPConnectTo(sys.argv[3], sys.argv[4])
     if sys.argv[2] == "updateUDPConnectToPublicKey": updateUDPConnectToPublicKey(sys.argv[3], sys.argv[4], sys.argv[5])
     if sys.argv[2] == "updateUDPConnectToPassword": updateUDPConnectToPassword(sys.argv[3], sys.argv[4], sys.argv[5])
-    if sys.argv[2] == "deleteUDPConnectTo": deleteUDPConnectTo(sys.argv[3], sys.argv[4])
     if sys.argv[2] == "updateUDPBindTo": updateUDPBindTo(sys.argv[3], sys.argv[4])
     if sys.argv[2] == "addEthernetInterface": addEthernetInterface(sys.argv[3])
     if sys.argv[2] == "deleteEthernetInterface": deleteEthernetInterface(sys.argv[3])
