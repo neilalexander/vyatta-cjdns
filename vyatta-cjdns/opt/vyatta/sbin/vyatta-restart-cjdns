@@ -13,7 +13,7 @@ then
     if [ `ls /config/cjdroute.*.conf 2>/dev/null | wc -l` -gt 0 ];
     then
         echo -n "Starting cjdns interface $1... "
-        nohup /opt/vyatta/sbin/cjdroute &>/var/log/cjdroute.$1.log < /config/cjdroute.$1.conf &
+        nohup /opt/vyatta/sbin/cjdroute &>/tmp/cjdroute.$1.log < /config/cjdroute.$1.conf &
         if [ $? -eq 0 ]; then echo $! > /var/run/cjdroute.$1.pid; echo "OK.";
         else rm -f /var/run/cjdroute.$1.pid &>/dev/null; echo "failed."; fi
     fi
@@ -31,7 +31,7 @@ else
         ls /config/cjdroute.*.conf | awk -v FS="(cjdroute.|.conf)" '{print $2}' | while read file;
         do
             echo -n "Starting cjdns interface $file... "
-            nohup /opt/vyatta/sbin/cjdroute &>/var/log/cjdroute.$1.log < /config/cjdroute.$file.conf &
+            nohup /opt/vyatta/sbin/cjdroute &>/tmp/cjdroute.$1.log < /config/cjdroute.$file.conf &
             if [ $? -eq 0 ]; then echo $! > /var/run/cjdroute.$file.pid; echo "OK.";
             else rm -f /var/run/cjdroute.$1.pid &>/dev/null; echo "failed."; fi
         done

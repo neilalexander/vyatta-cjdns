@@ -9,7 +9,7 @@ with open('/config/cjdroute.' + sys.argv[1] + '.conf') as data_file:
     data = json.load(data_file)
 
 def setStandardConfiguration():
-    data['logging']['logTo'] = "stdout"
+    data['logging']['logTo'] = ""
     data['noBackground'] = 1
 
 def addAuthorizedPassword(password):
