@@ -1,0 +1,2 @@
+help: Show information about a specific cjdns interface
+allowed: echo Interface name (i.e. tun0)

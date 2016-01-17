@@ -1,0 +1,2 @@
+run: /opt/vyatta/sbin/vyatta-cjdns-readconf $4 showIdentity
+help: Show IPv6 address and public/private keys
