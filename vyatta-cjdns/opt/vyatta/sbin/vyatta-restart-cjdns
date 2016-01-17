@@ -5,8 +5,7 @@ then
     if [ `cat /var/run/cjdroute.$1.pid 2>/dev/null | wc -l` -gt 0 ];
     then
         echo -n "Stopping cjdns interface $1... "
-        cat /var/run/cjdroute.$1.pid 2>/dev/null | xargs kill -P 2&>1
-        cat /var/run/cjdroute.$1.pid 2>/dev/null | xargs kill 2&>1
+        pkill -P `cat /var/run/cjdroute.$1.pid 2>/dev/null`
         if [ $? -eq 0 ]; then rm -f /var/run/cjdroute.$1.pid &>/dev/null; echo "OK.";
         else rm -f /var/run/cjdroute.$1.pid &>/dev/null; echo "failed."; fi
     fi
@@ -23,7 +22,6 @@ else
     then
         echo -n "Stopping running cjdns interfaces... "
         cat /var/run/cjdroute.*.pid 2>/dev/null | xargs kill -P 2&>1
-        cat /var/run/cjdroute.*.pid 2>/dev/null | xargs kill 2&>1
         if [ $? -eq 0 ]; then rm -f /var/run/cjdroute.*.pid &>/dev/null; echo "OK.";
         else rm -f /var/run/cjdroute.$1.pid &>/dev/null; echo "failed."; fi
     fi
