@@ -1,7 +1,6 @@
 type: txt
 help: cjdns public key
 val_help: txt; Public key
-syntax:expression: exec val=`echo $VAR(@) | awk '/[0-9A-Za-z]{52}\.k/{print -$1}' | wc -l`; echo `expr -1 + $val`
 
 create: /opt/vyatta/sbin/vyatta-cjdns-updateconf $VAR(../@) updatePublicKey $VAR(@)
 update: /opt/vyatta/sbin/vyatta-cjdns-updateconf $VAR(../@) updatePublicKey $VAR(@)
