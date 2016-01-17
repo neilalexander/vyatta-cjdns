@@ -10,7 +10,7 @@ with open('/config/cjdroute.' + sys.argv[1] + '.conf') as data_file:
 
 def setStandardConfiguration():
     data['logging']['logTo'] = "stdout"
-    data['noBackground'] = 0
+    data['noBackground'] = 1
 
 def addAuthorizedPassword(password):
     data['authorizedPasswords'].append(
