@@ -1,4 +1,4 @@
-# cjdns for Ubiquiti EdgeOS 
+# cjdns for Ubiquiti EdgeOS
 
 ### Introduction
 
@@ -6,7 +6,14 @@ This is a cjdns distributable package for Ubiquiti EdgeOS. It supports configura
 
 At this time this package is in very early stages of development, but the ultimate aim is to provide binary builds for some commonly-used platforms with pre-built cjdns binaries.
 
-### Building
+### Compatibility
+
+|                       | Architecture | Compatible |                          Notes                         |
+|-----------------------|:------------:|:----------:|:------------------------------------------------------:|
+|    EdgeRouter X (ERX) |    mipsel    |     Yes    |                                                        |
+| EdgeRouter Lite (ERL) |    mips64    |      -     | Currently unable to locate a suitable mips64 toolchain |
+
+### Building for EdgeRouter X
 
 On Debian Jessie, start by installing the toolchain:
 ```
@@ -23,7 +30,7 @@ Compile the package then by cloning the repository and running 'make':
 ```
 make
 ```
-The package `vyatta-cjdns.deb` will be created in the parent directory. 
+The package `vyatta-cjdns.deb` will be created in the parent directory.
 
 ### Configuration
 
@@ -42,7 +49,7 @@ set interfaces cjdns tun0 ethernet-interface 0 bind-interface switch0
 set interfaces cjdns tun0 ethernet-interface 0 beacon 2
 commit
 ```
-To manually configure your IPv6 address and keypair with a pre-existing one (i.e. to bring in an existing identity):
+An IPv6 address and a keypair are automatically generated when you create a new cjdns interface. The `publickey`, `privatekey` and `ipv6` fields will be automatically populated with these. To manually configure your own IPv6 address and keypair (i.e. to bring in an existing keypair from another machine):
 ```
 configure
 set interfaces cjdns tun0 publickey xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx.k
@@ -75,7 +82,7 @@ restart cjdns tun0
 
 ### Footnotes
 
-There is very little input validation right now on the configuration, so if you enter badly-formed config then `cjdroute` will simply fail to start. 
+There is very little input validation right now on the configuration, so if you enter badly-formed config then `cjdroute` will simply fail to start.
 
 You may also need to manually adjust your firewall to allow traffic on the `bind-address` that you specified.
 
