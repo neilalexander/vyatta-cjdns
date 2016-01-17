@@ -6,7 +6,7 @@ val_help: txt; Interface name (i.e. tun0)
 create: /opt/vyatta/sbin/vyatta-cjdns-createconf $VAR(@)
 update: /opt/vyatta/sbin/vyatta-cjdns-updateconf $VAR(@)
 delete: /opt/vyatta/sbin/vyatta-cjdns-deleteconf $VAR(@)
-end: /opt/vyatta/sbin/vyatta-restart-cjdns $VAR(@)
+end: sudo /opt/vyatta/sbin/vyatta-restart-cjdns $VAR(@)
 
 syntax:expression: pattern $VAR(@) "^tun[0-9]+$" \
          ; "Interface name must be (tun0-tun99)"
