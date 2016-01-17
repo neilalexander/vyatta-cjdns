@@ -25,7 +25,7 @@ def updateAuthorizedPassword(user, password):
         if data['authorizedPasswords'][i]['user'] == user:
             data['authorizedPasswords'][i]['password'] = password
 
-def deleteAuthorizedPassword(user, password):
+def deleteAuthorizedPassword(user):
     for i in range(len(data['authorizedPasswords'])):
         if data['authorizedPasswords'][i]['user'] == user:
             del data['authorizedPasswords'][i]
@@ -121,7 +121,7 @@ try:
     if sys.argv[2] == "setStandardConfiguration": setStandardConfiguration()
     if sys.argv[2] == "addAuthorizedPassword": addAuthorizedPassword(sys.argv[3], sys.argv[4])
     if sys.argv[2] == "updateAuthorizedPassword": updateAuthorizedPassword(sys.argv[3], sys.argv[4])
-    if sys.argv[2] == "deleteAuthorizedPassword": deleteAuthorizedPassword(sys.argv[3], sys.argv[4])
+    if sys.argv[2] == "deleteAuthorizedPassword": deleteAuthorizedPassword(sys.argv[3])
     if sys.argv[2] == "addUDPInterface": addUDPInterface(sys.argv[3])
     if sys.argv[2] == "deleteUDPInterface": deleteUDPInterface(sys.argv[3])
     if sys.argv[2] == "addUDPConnectTo": addUDPConnectTo(sys.argv[3], sys.argv[4])
