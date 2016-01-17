@@ -1,7 +1,0 @@
-type: txt
-help: Public key
-val_help: txt; Public key
-
-create: /opt/vyatta/sbin/vyatta-cjdns-updateconf $VAR(../../@) updateUDPConnectToPublicKey $VAR(../@) $VAR(@)
-update: /opt/vyatta/sbin/vyatta-cjdns-updateconf $VAR(../../@) updateUDPConnectToPublicKey $VAR(../@) $VAR(@)
-delete: /opt/vyatta/sbin/vyatta-cjdns-updateconf $VAR(../../@) updateUDPConnectToPublicKey $VAR(../@) $VAR(@)

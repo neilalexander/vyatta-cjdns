@@ -1,0 +1,8 @@
+tag:
+type: u32
+help: UDP interface number (must start at ZERO)
+val_help: u32; UDP interface number
+
+create: /opt/vyatta/sbin/vyatta-cjdns-updateconf $VAR(../@) addUDPInterface $VAR(@)
+update: /opt/vyatta/sbin/vyatta-cjdns-updateconf $VAR(../@) addUDPInterface $VAR(@)
+delete: /opt/vyatta/sbin/vyatta-cjdns-updateconf $VAR(../@) deleteUDPInterface $VAR(@)

@@ -22,24 +22,45 @@ def deleteAuthorizedPassword(password):
         { "password": password }
     )
 
-def addUDPConnectTo(endpoint):
-    data['interfaces']['UDPInterface'][0]['connectTo'][endpoint] = {}
+def addUDPInterface(interface):
+    if int(interface) > len(data['interfaces']['UDPInterface']):
+        print "Invalid interface ID; must be in sequence with previous interface"
+    else:
+        try:
+            assert data['interfaces']['UDPInterface'][int(interface)] is not dict
+        except IndexError:
+            data['interfaces']['UDPInterface'].insert(int(interface), {})
+        finally:
+            data['interfaces']['UDPInterface'][int(interface)] = {
+                "bind": "",
+                "connectTo": {}
+            }
 
-def updateUDPConnectToPublicKey(endpoint, publicKey):
+def deleteUDPInterface(interface):
+    if int(interface) >= len(data['interfaces']['UDPInterface']):
+        print "Invalid interface ID; must be a configured interface ID"
+    else:
+        if type(data['interfaces']['UDPInterface'][int(interface)]) is dict:
+            data['interfaces']['UDPInterface'][int(interface)] = {}
+
+def addUDPConnectTo(interface, endpoint):
+    data['interfaces']['UDPInterface'][int(interface)]['connectTo'][endpoint] = {}
+
+def updateUDPConnectToPublicKey(interface, endpoint, publicKey):
     if endpoint not in data['interfaces']['UDPInterface'][0]['connectTo']:
-        data['interfaces']['UDPInterface'][0]['connectTo'][endpoint] = {}
-    data['interfaces']['UDPInterface'][0]['connectTo'][endpoint]['publicKey'] = publicKey
+        data['interfaces']['UDPInterface'][int(interface)]['connectTo'][endpoint] = {}
+    data['interfaces']['UDPInterface'][int(interface)]['connectTo'][endpoint]['publicKey'] = publicKey
 
-def updateUDPConnectToPassword(endpoint, password):
+def updateUDPConnectToPassword(interface, endpoint, password):
     if endpoint not in data['interfaces']['UDPInterface'][0]['connectTo']:
-        data['interfaces']['UDPInterface'][0]['connectTo'][endpoint] = {}
-    data['interfaces']['UDPInterface'][0]['connectTo'][endpoint]['password'] = password
+        data['interfaces']['UDPInterface'][int(interface)]['connectTo'][endpoint] = {}
+    data['interfaces']['UDPInterface'][int(interface)]['connectTo'][endpoint]['password'] = password
 
-def deleteUDPConnectTo(endpoint):
-    del data['interfaces']['UDPInterface'][0]['connectTo'][endpoint]
+def deleteUDPConnectTo(interface, endpoint):
+    del data['interfaces']['UDPInterface'][interface]['connectTo'][endpoint]
 
-def updateUDPBindTo(endpoint):
-    data['interfaces']['UDPInterface'][0]['bind'] = endpoint
+def updateUDPBindTo(interface, endpoint):
+    data['interfaces']['UDPInterface'][int(interface)]['bind'] = endpoint
 
 def updateAdminBindAddress(address):
     data['admin']['bind'] = address
@@ -64,19 +85,21 @@ try:
     if sys.argv[2] == "setStandardConfiguration": setStandardConfiguration()
     if sys.argv[2] == "addAuthorizedPassword": addAuthorizedPassword(sys.argv[3])
     if sys.argv[2] == "deleteAuthorizedPassword": deleteAuthorizedPassword(sys.argv[3])
-    if sys.argv[2] == "addUDPConnectTo": addUDPConnectTo(sys.argv[3])
-    if sys.argv[2] == "updateUDPConnectToPublicKey": updateUDPConnectToPublicKey(sys.argv[3], sys.argv[4])
-    if sys.argv[2] == "updateUDPConnectToPassword": updateUDPConnectToPassword(sys.argv[3], sys.argv[4])
-    if sys.argv[2] == "deleteUDPConnectTo": deleteUDPConnectTo(sys.argv[3])
-    if sys.argv[2] == "updateUDPBindTo": updateUDPBindTo(sys.argv[3])
+    if sys.argv[2] == "addUDPInterface": addUDPInterface(sys.argv[3])
+    if sys.argv[2] == "deleteUDPInterface": deleteUDPInterface(sys.argv[3])
+    if sys.argv[2] == "addUDPConnectTo": addUDPConnectTo(sys.argv[3], sys.argv[4])
+    if sys.argv[2] == "updateUDPConnectToPublicKey": updateUDPConnectToPublicKey(sys.argv[3], sys.argv[4], sys.argv[5])
+    if sys.argv[2] == "updateUDPConnectToPassword": updateUDPConnectToPassword(sys.argv[3], sys.argv[4], sys.argv[5])
+    if sys.argv[2] == "deleteUDPConnectTo": deleteUDPConnectTo(sys.argv[3], sys.argv[4])
+    if sys.argv[2] == "updateUDPBindTo": updateUDPBindTo(sys.argv[3], sys.argv[4])
     if sys.argv[2] == "updateAdminBindAddress": updateAdminBindAddress(sys.argv[3])
     if sys.argv[2] == "updateAdminPassword": updateAdminPassword(sys.argv[3])
     if sys.argv[2] == "updatePublicKey": updatePublicKey(sys.argv[3])
     if sys.argv[2] == "updatePrivateKey": updatePrivateKey(sys.argv[3])
     if sys.argv[2] == "updateIPv6Address": updateIPv6Address(sys.argv[3])
     if sys.argv[2] == "updateTunDevice": updateTunDevice(sys.argv[3])
-except IndexError:
-    print "Incorrect number of parameters supplied"
+#except IndexError:
+#    print "Incorrect number of parameters supplied"
 finally:
     setStandardConfiguration()
     with open('/config/cjdroute.' + sys.argv[1] + '.conf', 'w') as outfile:
