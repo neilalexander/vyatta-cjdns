@@ -1,0 +1,25 @@
+#!/usr/bin/python
+
+import json
+import sys
+
+data = {}
+
+with open('/config/cjdroute.' + sys.argv[1] + '.conf') as data_file:
+    data = json.load(data_file)
+
+def getPublicKey(publicKey):
+    print data['publicKey']
+
+def getPrivateKey(privateKey):
+    print data['privateKey']
+
+def getIPv6Address(address):
+    print data['ipv6']
+
+try:
+    if sys.argv[2] == "getPublicKey": getPublicKey(sys.argv[2])
+    if sys.argv[2] == "getPrivateKey": getPrivateKey(sys.argv[2])
+    if sys.argv[2] == "getIPv6Address": getIPv6Address(sys.argv[2])
+except IndexError:
+    print "Incorrect number of parameters supplied"

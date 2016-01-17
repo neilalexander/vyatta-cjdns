@@ -81,7 +81,7 @@ def updateEthernetBindTo(interface, endpoint):
     data['interfaces']['ETHInterface'][int(interface)]['bind'] = endpoint
 
 def updateEthernetBeacon(interface, beaconmode):
-    data['interfaces']['ETHInterface'][int(interface)]['beacon'] = beaconmode
+    data['interfaces']['ETHInterface'][int(interface)]['beacon'] = int(beaconmode)
 
 def deleteEthernetInterface(interface):
     if int(interface) >= len(data['interfaces']['ETHInterface']):
@@ -130,8 +130,8 @@ try:
     if sys.argv[2] == "updatePrivateKey": updatePrivateKey(sys.argv[3])
     if sys.argv[2] == "updateIPv6Address": updateIPv6Address(sys.argv[3])
     if sys.argv[2] == "updateTunDevice": updateTunDevice(sys.argv[3])
-#except IndexError:
-#    print "Incorrect number of parameters supplied"
+except IndexError:
+    print "Incorrect number of parameters supplied"
 finally:
     setStandardConfiguration()
     with open('/config/cjdroute.' + sys.argv[1] + '.conf', 'w') as outfile:
