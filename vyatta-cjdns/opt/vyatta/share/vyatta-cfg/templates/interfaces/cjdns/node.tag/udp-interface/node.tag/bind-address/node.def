@@ -1,0 +1,7 @@
+type: txt
+help: Bind address in Host:Port notation, either IPv4 or IPv6
+val_help: txt; Bind address
+
+create: /opt/vyatta/sbin/vyatta-cjdns-updateconf $VAR(../../@) updateUDPBindTo $VAR(../@) $VAR(@)
+update: /opt/vyatta/sbin/vyatta-cjdns-updateconf $VAR(../../@) updateUDPBindTo $VAR(../@) $VAR(@)
+delete: /opt/vyatta/sbin/vyatta-cjdns-updateconf $VAR(../../@) updateUDPBindTo $VAR(../@) $VAR(@)
