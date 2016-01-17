@@ -1,6 +1,6 @@
-type: text
+type: txt
 help: Authorized password for incoming connections
-val_help: text; Authorized password
+val_help: txt; Authorized password
 
 create: /opt/vyatta/sbin/vyatta-cjdns-updateconf $VAR(../../@) addAuthorizedPassword $VAR(../@) $VAR(@)
 update: /opt/vyatta/sbin/vyatta-cjdns-updateconf $VAR(../../@) updateAuthorizedPassword $VAR(../@) $VAR(@)
