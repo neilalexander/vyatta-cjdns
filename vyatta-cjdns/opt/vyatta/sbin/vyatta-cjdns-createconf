@@ -16,6 +16,7 @@ else
 	${vyatta_sbindir}/my_set interfaces cjdns $1 publickey `/opt/vyatta/sbin/vyatta-cjdns-readconf $1 getPublicKey`
 	${vyatta_sbindir}/my_set interfaces cjdns $1 privatekey `/opt/vyatta/sbin/vyatta-cjdns-readconf $1 getPrivateKey`
 	${vyatta_sbindir}/my_set interfaces cjdns $1 ipv6 `/opt/vyatta/sbin/vyatta-cjdns-readconf $1 getIPv6Address`
+	${vyatta_sbindir}/my_commit
 	
 	function atexit() {
 		cli-shell-api teardownSession
