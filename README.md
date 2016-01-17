@@ -23,3 +23,29 @@ Compile the package then by cloning the repository and running 'make':
 ```
 make
 ```
+
+### Configuration
+
+To establish a peering is straight-forward; replace `bind-address` with the address you want cjdroute to listen on:
+```
+configure
+set interfaces cjdns tun0 udp-interface 0 bind-address 'a.b.c.d:e'
+set interfaces cjdns tun0 udp-interface 0 peers 'a.b.c.d:e' password xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+set interfaces cjdns tun0 udp-interface 0 peers 'a.b.c.d:e' publickey xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx.k
+commit
+```
+To configure beacons to automatically peer with other devices on your network (assuming `switch0` is your internal interface):
+```
+configure
+set interfaces cjdns tun0 ethernet-interface 0 bind-interface switch0
+set interfaces cjdns tun0 ethernet-interface 0 beacon 2
+commit
+```
+To manually configure your IPv6 address and keypair with a pre-existing one (i.e. to port in an old identity):
+```
+configure
+set interfaces cjdns tun0 publickey xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx.k
+set interfaces cjdns tun0 privatekey xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+set interfaces cjdns tun0 ipv6 xxxx:xxxx:xxxx:xxxx:xxxx:xxxx:xxxx:xxxx
+commit
+```
