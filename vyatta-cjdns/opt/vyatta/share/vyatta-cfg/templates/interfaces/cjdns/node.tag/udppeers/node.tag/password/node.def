@@ -5,4 +5,3 @@ val_help: txt; Password
 create: /opt/vyatta/sbin/vyatta-cjdns-updateconf $VAR(../../@) updateUDPConnectToPassword $VAR(../@) $VAR(@)
 update: /opt/vyatta/sbin/vyatta-cjdns-updateconf $VAR(../../@) updateUDPConnectToPassword $VAR(../@) $VAR(@)
 delete: /opt/vyatta/sbin/vyatta-cjdns-updateconf $VAR(../../@) updateUDPConnectToPassword $VAR(../@) $VAR(@)
-end: /opt/vyatta/sbin/vyatta-restart-cjdns $VAR(../../@)
