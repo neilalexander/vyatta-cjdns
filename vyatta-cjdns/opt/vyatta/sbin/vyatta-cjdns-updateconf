@@ -13,7 +13,7 @@ def setStandardConfiguration():
     data['noBackground'] = 1
     data['interfaces']['UDPInterface'] = []
     data['interfaces']['ETHInterface'] = []
-    data['authorisedPasswords'] = []
+    data['authorizedPasswords'] = []
 
 def addAuthorizedPassword(user, password):
     data['authorizedPasswords'].append(
