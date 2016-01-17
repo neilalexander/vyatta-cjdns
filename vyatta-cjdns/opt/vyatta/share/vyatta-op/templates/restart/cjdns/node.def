@@ -1,2 +1,2 @@
 help: Restart the specified cjdns interface
-allowed: echo "interface"
+allowed: ls /config/cjdroute.*.conf | cut -d. -f2

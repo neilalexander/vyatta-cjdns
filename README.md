@@ -1,4 +1,4 @@
-# cjdns for Ubiquiti EdgeOS / Vyatta
+# cjdns for Ubiquiti EdgeOS 
 
 ### Introduction
 
@@ -23,6 +23,7 @@ Compile the package then by cloning the repository and running 'make':
 ```
 make
 ```
+The package `vyatta-cjdns.deb` will be created in the parent directory. 
 
 ### Configuration
 
@@ -55,5 +56,9 @@ show interfaces cjdns peers
 ```
 To see your IPv6 address and public/private keys, in operational view:
 ```
-show interfaces cjdns identity
+show interfaces cjdns tun0 identity
+```
+To restart a cjdns tunnel, in operational view:
+```
+restart cjdns tun0
 ```
