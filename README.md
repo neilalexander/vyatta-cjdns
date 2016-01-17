@@ -50,6 +50,16 @@ set interfaces cjdns tun0 privatekey xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
 set interfaces cjdns tun0 ipv6 xxxx:xxxx:xxxx:xxxx:xxxx:xxxx:xxxx:xxxx
 commit
 ```
+An example stateful firewall configuration that will block unexpected incoming traffic on the cjdns interface:
+```
+set firewall ipv6-name CJD_LOCAL default-action drop
+set firewall ipv6-name CJD_LOCAL rule 10 action accept
+set firewall ipv6-name CJD_LOCAL rule 10 state established enable
+set firewall ipv6-name CJD_LOCAL rule 10 state related enable
+set firewall ipv6-name CJD_LOCAL rule 20 action drop
+set firewall ipv6-name CJD_LOCAL rule 20 state invalid enable
+set interfaces cjdns tun0 firewall local ipv6-name CJD_LOCAL
+```
 To see information about peerings, in operational view:
 ```
 show interfaces cjdns peers
@@ -68,3 +78,5 @@ restart cjdns tun0
 There is very little input validation right now on the configuration, so if you enter badly-formed config then `cjdroute` will simply fail to start. 
 
 You may also need to manually adjust your firewall to allow traffic on the necessary ports.
+
+The EdgeRouter X claims architecture `mipsel`, but the EdgeRouter Lite claims architecture `mips`. If you have problems installing the `.deb` file onto the EdgeRouter Lite, then change the `Architecture: mipsel` line in `debian/control` to `Architecture: mips` and then run `make package` to rebuild the package.
