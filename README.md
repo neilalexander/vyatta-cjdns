@@ -57,6 +57,13 @@ set interfaces cjdns tun0 privatekey xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
 set interfaces cjdns tun0 ipv6 xxxx:xxxx:xxxx:xxxx:xxxx:xxxx:xxxx:xxxx
 commit
 ```
+To configure new authorized passwords for incoming connections:
+```
+configure
+set interfaces cjdns tun0 authorized-password user1 password password1
+set interfaces cjdns tun0 authorized-password user2 password password2
+commit
+```
 An example stateful firewall configuration that will block unexpected incoming traffic on the cjdns interface, i.e. to prevent other people from reaching your ssh or Web UI ports:
 ```
 set firewall ipv6-name CJD_LOCAL default-action drop

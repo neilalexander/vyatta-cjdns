@@ -11,15 +11,23 @@ with open('/config/cjdroute.' + sys.argv[1] + '.conf') as data_file:
 def setStandardConfiguration():
     data['logging']['logTo'] = ""
     data['noBackground'] = 1
+    data['interfaces']['UDPInterface'] = []
+    data['interfaces']['ETHInterface'] = []
+    data['interfaces']['authorisedPasswords'] = []
 
-def addAuthorizedPassword(password):
+def addAuthorizedPassword(user, password):
     data['authorizedPasswords'].append(
-        { "password": password }
+        { "user": user, "password": password }
     )
 
-def deleteAuthorizedPassword(password):
+def updateAuthorizedPassword(user, password):
+    for i in range(len(data['authorizedPasswords'])):
+        if data['authorizedPasswords'][i]['user'] == user:
+            data['authorizedPasswords'][i]['password'] = password
+
+def deleteAuthorizedPassword(user, password):
     data['authorizedPasswords'].remove(
-        { "password": password }
+        { "user": user, "password": password }
     )
 
 def addUDPInterface(interface):
@@ -111,8 +119,9 @@ def updateTunDevice(device):
 
 try:
     if sys.argv[2] == "setStandardConfiguration": setStandardConfiguration()
-    if sys.argv[2] == "addAuthorizedPassword": addAuthorizedPassword(sys.argv[3])
-    if sys.argv[2] == "deleteAuthorizedPassword": deleteAuthorizedPassword(sys.argv[3])
+    if sys.argv[2] == "addAuthorizedPassword": addAuthorizedPassword(sys.argv[3], sys.argv[4])
+    if sys.argv[2] == "updateAuthorizedPassword": addAuthorizedPassword(sys.argv[3], sys.argv[4])
+    if sys.argv[2] == "deleteAuthorizedPassword": deleteAuthorizedPassword(sys.argv[3], sys.argv[4])
     if sys.argv[2] == "addUDPInterface": addUDPInterface(sys.argv[3])
     if sys.argv[2] == "deleteUDPInterface": deleteUDPInterface(sys.argv[3])
     if sys.argv[2] == "addUDPConnectTo": addUDPConnectTo(sys.argv[3], sys.argv[4])
