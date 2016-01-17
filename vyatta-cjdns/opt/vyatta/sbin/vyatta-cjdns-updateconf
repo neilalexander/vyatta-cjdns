@@ -120,7 +120,7 @@ def updateTunDevice(device):
 try:
     if sys.argv[2] == "setStandardConfiguration": setStandardConfiguration()
     if sys.argv[2] == "addAuthorizedPassword": addAuthorizedPassword(sys.argv[3], sys.argv[4])
-    if sys.argv[2] == "updateAuthorizedPassword": addAuthorizedPassword(sys.argv[3], sys.argv[4])
+    if sys.argv[2] == "updateAuthorizedPassword": updateAuthorizedPassword(sys.argv[3], sys.argv[4])
     if sys.argv[2] == "deleteAuthorizedPassword": deleteAuthorizedPassword(sys.argv[3], sys.argv[4])
     if sys.argv[2] == "addUDPInterface": addUDPInterface(sys.argv[3])
     if sys.argv[2] == "deleteUDPInterface": deleteUDPInterface(sys.argv[3])
