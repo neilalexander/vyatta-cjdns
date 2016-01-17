@@ -1,0 +1,2 @@
+run: /opt/vyatta/sbin/vyatta-restart-cjdns $3
+help: Restart the specified cjdns interface

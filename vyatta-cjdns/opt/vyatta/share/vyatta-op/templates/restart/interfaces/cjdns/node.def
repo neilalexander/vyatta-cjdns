@@ -1,0 +1,3 @@
+run: /opt/vyatta/sbin/vyatta-restart-cjdns
+allowed: echo Interface name (i.e. tun0)
+help: Restart all cjdns interfaces
