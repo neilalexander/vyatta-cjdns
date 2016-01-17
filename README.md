@@ -27,12 +27,12 @@ The package `vyatta-cjdns.deb` will be created in the parent directory.
 
 ### Configuration
 
-To establish a peering is straight-forward; replace `bind-address` with the address you want cjdroute to listen on:
+To establish a peering is straight-forward; replace `bind-address` with the address you want cjdroute to listen on in `ip:port` format:
 ```
 configure
-set interfaces cjdns tun0 udp-interface 0 bind-address 'a.b.c.d:e'
-set interfaces cjdns tun0 udp-interface 0 peers 'a.b.c.d:e' password xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
-set interfaces cjdns tun0 udp-interface 0 peers 'a.b.c.d:e' publickey xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx.k
+set interfaces cjdns tun0 udp-interface 0 bind-address a.b.c.d:e
+set interfaces cjdns tun0 udp-interface 0 peers a.b.c.d:e password xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+set interfaces cjdns tun0 udp-interface 0 peers a.b.c.d:e publickey xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx.k
 commit
 ```
 To configure beacons to automatically peer with other devices on your network (assuming `switch0` is your internal interface):
@@ -42,7 +42,7 @@ set interfaces cjdns tun0 ethernet-interface 0 bind-interface switch0
 set interfaces cjdns tun0 ethernet-interface 0 beacon 2
 commit
 ```
-To manually configure your IPv6 address and keypair with a pre-existing one (i.e. to port in an old identity):
+To manually configure your IPv6 address and keypair with a pre-existing one (i.e. to bring in an existing identity):
 ```
 configure
 set interfaces cjdns tun0 publickey xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx.k
@@ -62,3 +62,9 @@ To restart a cjdns tunnel, in operational view:
 ```
 restart cjdns tun0
 ```
+
+### Footnotes
+
+There is very little input validation right now on the configuration, so if you enter badly-formed config then `cjdroute` will simply fail to start. 
+
+You may also need to manually adjust your firewall to allow traffic on the necessary ports.
