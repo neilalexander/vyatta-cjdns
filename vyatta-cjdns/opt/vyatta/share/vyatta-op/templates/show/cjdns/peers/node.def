@@ -1,0 +1,2 @@
+run: /opt/vyatta/sbin/vyatta-cjdns-peerstats -h
+help: Show active peerings
