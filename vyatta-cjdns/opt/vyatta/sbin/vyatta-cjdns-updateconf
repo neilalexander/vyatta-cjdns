@@ -142,6 +142,5 @@ try:
 except IndexError:
     print "Incorrect number of parameters supplied"
 finally:
-    setStandardConfiguration()
     with open('/config/cjdroute.' + sys.argv[1] + '.conf', 'w') as outfile:
         json.dump(data, outfile, indent=4)
