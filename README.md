@@ -79,4 +79,4 @@ There is very little input validation right now on the configuration, so if you 
 
 You may also need to manually adjust your firewall to allow traffic on the `bind-address` that you specified.
 
-The EdgeRouter X claims architecture `mipsel`, but the EdgeRouter Lite claims architecture `mips`. If you have problems installing the `.deb` file onto the EdgeRouter Lite, then change the `Architecture: mipsel` line in `debian/control` to `Architecture: mips` and then run `make package` to rebuild the package.
+The EdgeRouter X claims architecture `mipsel`, but the EdgeRouter Lite claims architecture `mips64`. Not currently sure how to cross-compile for `mips64` using crossbuild on Jessie. Any thoughts appreciated.
