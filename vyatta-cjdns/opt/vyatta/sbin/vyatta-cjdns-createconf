@@ -5,7 +5,7 @@ echo "cjdns generate conf: $1"
 /opt/vyatta/sbin/cjdroute --genconf | /opt/vyatta/sbin/cjdroute --cleanconf > /config/cjdroute.$1.conf
 /opt/vyatta/sbin/vyatta-cjdns-updateconf $1 setStandardConfiguration
 
-session_env=$($SHELL_API getSessionEnv $PPID)
+session_env=$(cli-shell-api getSessionEnv $PPID)
 eval $session_env
 cli-shell-api setupSession
 
