@@ -1,0 +1,8 @@
+tag:
+type: u32
+help: Ethernet interface number (must start at ZERO)
+val_help: u32; Ethernet interface number
+
+create: /opt/vyatta/sbin/vyatta-cjdns-updateconf $VAR(../@) addEthernetInterface $VAR(@)
+update: /opt/vyatta/sbin/vyatta-cjdns-updateconf $VAR(../@) addEthernetInterface $VAR(@)
+delete: /opt/vyatta/sbin/vyatta-cjdns-updateconf $VAR(../@) deleteEthernetInterface $VAR(@)

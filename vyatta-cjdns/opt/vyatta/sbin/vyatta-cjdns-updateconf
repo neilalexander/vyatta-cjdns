@@ -57,10 +57,38 @@ def updateUDPConnectToPassword(interface, endpoint, password):
     data['interfaces']['UDPInterface'][int(interface)]['connectTo'][endpoint]['password'] = password
 
 def deleteUDPConnectTo(interface, endpoint):
-    del data['interfaces']['UDPInterface'][interface]['connectTo'][endpoint]
+    del data['interfaces']['UDPInterface'][int(interface)]['connectTo'][endpoint]
 
 def updateUDPBindTo(interface, endpoint):
     data['interfaces']['UDPInterface'][int(interface)]['bind'] = endpoint
+
+def addEthernetInterface(interface):
+    if int(interface) > len(data['interfaces']['ETHInterface']):
+        print "Invalid interface ID; must be in sequence with previous interface"
+    else:
+        try:
+            assert data['interfaces']['ETHInterface'][int(interface)] is not dict
+        except IndexError:
+            data['interfaces']['ETHInterface'].insert(int(interface), {})
+        finally:
+            data['interfaces']['ETHInterface'][int(interface)] = {
+                "bind": "",
+                "beacon": "",
+                "connectTo": {}
+            }
+
+def updateEthernetBindTo(interface, endpoint):
+    data['interfaces']['ETHInterface'][int(interface)]['bind'] = endpoint
+
+def updateEthernetBeacon(interface, beaconmode):
+    data['interfaces']['ETHInterface'][int(interface)]['beacon'] = beaconmode
+
+def deleteEthernetInterface(interface):
+    if int(interface) >= len(data['interfaces']['ETHInterface']):
+        print "Invalid interface ID; must be a configured interface ID"
+    else:
+        if type(data['interfaces']['ETHInterface'][int(interface)]) is dict:
+            data['interfaces']['ETHInterface'][int(interface)] = {}
 
 def updateAdminBindAddress(address):
     data['admin']['bind'] = address
@@ -92,6 +120,10 @@ try:
     if sys.argv[2] == "updateUDPConnectToPassword": updateUDPConnectToPassword(sys.argv[3], sys.argv[4], sys.argv[5])
     if sys.argv[2] == "deleteUDPConnectTo": deleteUDPConnectTo(sys.argv[3], sys.argv[4])
     if sys.argv[2] == "updateUDPBindTo": updateUDPBindTo(sys.argv[3], sys.argv[4])
+    if sys.argv[2] == "addEthernetInterface": addEthernetInterface(sys.argv[3])
+    if sys.argv[2] == "deleteEthernetInterface": deleteEthernetInterface(sys.argv[3])
+    if sys.argv[2] == "updateEthernetBindTo": updateEthernetBindTo(sys.argv[3], sys.argv[4])
+    if sys.argv[2] == "updateEthernetBeacon": updateEthernetBeacon(sys.argv[3], sys.argv[4])
     if sys.argv[2] == "updateAdminBindAddress": updateAdminBindAddress(sys.argv[3])
     if sys.argv[2] == "updateAdminPassword": updateAdminPassword(sys.argv[3])
     if sys.argv[2] == "updatePublicKey": updatePublicKey(sys.argv[3])

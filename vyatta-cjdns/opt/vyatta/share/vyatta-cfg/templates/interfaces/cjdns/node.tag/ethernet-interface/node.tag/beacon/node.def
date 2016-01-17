@@ -1,0 +1,7 @@
+type: u32
+help: Beacon mode (0=disabled, 1=listen, 2=listen+send)
+val_help: u32; Beacon mode
+
+create: /opt/vyatta/sbin/vyatta-cjdns-updateconf $VAR(../../@) updateEthernetBeacon $VAR(../@) $VAR(@)
+update: /opt/vyatta/sbin/vyatta-cjdns-updateconf $VAR(../../@) updateEthernetBeacon $VAR(../@) $VAR(@)
+delete: /opt/vyatta/sbin/vyatta-cjdns-updateconf $VAR(../../@) updateEthernetBeacon $VAR(../@) $VAR(@)

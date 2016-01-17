@@ -1,0 +1,7 @@
+type: txt
+help: Physical interface name to bind to (i.e. eth0)
+val_help: txt; Physical interface name
+
+create: /opt/vyatta/sbin/vyatta-cjdns-updateconf $VAR(../../@) updateEthernetBindTo $VAR(../@) $VAR(@)
+update: /opt/vyatta/sbin/vyatta-cjdns-updateconf $VAR(../../@) updateEthernetBindTo $VAR(../@) $VAR(@)
+delete: /opt/vyatta/sbin/vyatta-cjdns-updateconf $VAR(../../@) updateEthernetBindTo $VAR(../@) $VAR(@)
