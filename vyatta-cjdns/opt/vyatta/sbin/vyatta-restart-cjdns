@@ -2,7 +2,7 @@
 
 if [ -n $1 ];
 then
-    if [ `pgrep $1 | grep $1 | wc -l` -gt 0 ];
+    if [ `cat /var/run/cjdroute.$1.pid 2>/dev/null | xargs ps -p 2>/dev/null | wc -l` -ge 2 ];
     then
         echo -n "Stopping cjdns interface $1... "
         cat /var/run/cjdroute.$1.pid 2>/dev/null | xargs kill 2&>1
