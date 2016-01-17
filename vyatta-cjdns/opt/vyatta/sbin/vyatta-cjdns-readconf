@@ -17,7 +17,7 @@ def getPrivateKey(privateKey):
 def getIPv6Address(address):
     print data['ipv6']
  
-def showIdentity()
+def showIdentity():
     print "IPv6 address: " + getIPv6Address()
     print "Public key: " + getPublicKey()
     print "Private key: " + getPrivateKey()

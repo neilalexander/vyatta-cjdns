@@ -1,3 +1,2 @@
 run: sudo /opt/vyatta/sbin/vyatta-restart-cjdns $3
 help: Restart the specified cjdns interface
-allowed: echo Interface name (i.e. tun0)
