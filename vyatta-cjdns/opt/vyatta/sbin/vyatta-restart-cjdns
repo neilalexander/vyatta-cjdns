@@ -5,25 +5,25 @@ then
     if [ `pgrep $1 | grep $1 | wc -l` -gt 0 ];
     then
         echo -n "Stopping cjdns interface $1... "
-        cat /var/run/cjdroute.$1.pid | xargs kill 2&>1
+        cat /var/run/cjdroute.$1.pid 2>/dev/null | xargs kill 2&>1
         if [ $? -eq 0 ]; then rm -f /var/run/cjdroute.$1.pid &>/dev/null; echo "OK."; else echo "failed."; fi
     fi
 
-    if [ `ls /config/cjdroute.*.conf | wc -l` -gt 0 ];
+    if [ `ls /config/cjdroute.*.conf 2>/dev/null | wc -l` -gt 0 ];
     then
         echo -n "Starting cjdns interface $1... "
         /opt/vyatta/sbin/cjdroute &>/var/log/cjdroute.$1.log < /config/cjdroute.$1.conf &
         if [ $? -eq 0 ]; then echo $! > /var/run/cjdroute.$1.pid; echo "OK."; else echo "failed."; fi
     fi
 else
-    if [ `pgrep cjdroute | wc -l` -gt 0 ];
+    if [ `pgrep cjdroute 2>/dev/null | wc -l` -gt 0 ];
     then
         echo -n "Stopping running cjdns interfaces... "
-        cat /var/run/cjdroute.*.pid | xargs kill 2&>1
-        if [ $? -eq 0 ]; then rm -f /var/run/cjdroute.$1.pid &>/dev/null; echo "OK."; else echo "failed."; fi
+        cat /var/run/cjdroute.*.pid 2>/dev/null | xargs kill 2&>1
+        if [ $? -eq 0 ]; then rm -f /var/run/cjdroute.*.pid &>/dev/null; echo "OK."; else echo "failed."; fi
     fi
 
-    if [ `ls /config/cjdroute.*.conf | wc -l` -gt 0 ];
+    if [ `ls /config/cjdroute.*.conf 2>/dev/null | wc -l` -gt 0 ];
     then
         ls /config/cjdroute.*.conf | awk -v FS="(cjdroute.|.conf)" '{print $2}' | while read file;
         do
