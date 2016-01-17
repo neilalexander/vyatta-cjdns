@@ -1,2 +1,2 @@
 help: Show information about a specific cjdns interface
-allowed: echo "interface"
+allowed: ls /config/cjdroute.*.conf | cut -d. -f2

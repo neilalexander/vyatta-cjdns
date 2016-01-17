@@ -18,9 +18,9 @@ def getIPv6Address():
     print data['ipv6']
  
 def showIdentity():
-    print "IPv6 address: " + getIPv6Address()
-    print "Public key: " + getPublicKey()
-    print "Private key: " + getPrivateKey()
+    print "IPv6 address: " + data['ipv6']
+    print "Public key: " + data['publicKey']
+    print "Private key: " + data['privateKey']
 
 try:
     if sys.argv[2] == "getPublicKey": getPublicKey()
