@@ -20,9 +20,9 @@ from time import sleep
 from cjdnsadmin.cjdnsadmin import connect
 from cjdnsadmin.publicToIp6 import PublicToIp6_convert
 
-def connect(ip='127.0.0.1', port=11234, password=''):
+def connecttoadmin(ip='127.0.0.1', port=11234, password=''):
     from cjdnsadmin.cjdnsadmin import connectWithAdminInfo
-    return connectWithAdminInfo()
+    return connect(ip, int(port), password)
 
 def disconnect(cjdns):
     cjdns.disconnect()
@@ -64,8 +64,8 @@ def peerStats(cjdns,up=False):
 
     return allPeers
 
-bindaddress = os.popen('/opt/vyatta/sbin/vyatta-cjdns-readconf ' + sys.argv[1] + ' getAdminAddress').read().split(":")
-bindpassword = os.popen('/opt/vyatta/sbin/vyatta-cjdns-readconf ' + sys.argv[1] + ' getAdminPassword').read()
-cjdns = connect(ip=bindaddress[0], port=bindaddress[1], password=bindpassword)
+bindaddress = os.popen('/opt/vyatta/sbin/vyatta-cjdns-readconf ' + sys.argv[1] + ' getAdminAddress').read().strip().split(":")
+bindpassword = os.popen('/opt/vyatta/sbin/vyatta-cjdns-readconf ' + sys.argv[1] + ' getAdminPassword').read().strip()
+cjdns = connecttoadmin(bindaddress[0], bindaddress[1], bindpassword)
 peerStats(cjdns);
 cjdns.disconnect()
