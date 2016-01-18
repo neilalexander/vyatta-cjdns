@@ -9,10 +9,10 @@ with open('/config/cjdroute.' + sys.argv[1] + '.conf') as data_file:
     data = json.load(data_file)
 
 def getAdminAddress():
-    return data['admin']['bind']
+    print data['admin']['bind']
 
 def getAdminPassword():
-    return data['admin']['password']
+    print data['admin']['password']
 
 def getPublicKey():
     print data['publicKey']

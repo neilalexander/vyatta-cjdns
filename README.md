@@ -76,7 +76,7 @@ set interfaces cjdns tun0 firewall local ipv6-name CJD_LOCAL
 ```
 To see information about peerings, in operational view:
 ```
-show interfaces cjdns peers
+show interfaces cjdns tun0 peers
 ```
 To see your IPv6 address and public/private keys, in operational view:
 ```
