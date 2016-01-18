@@ -64,10 +64,8 @@ def peerStats(cjdns,up=False):
 
     return allPeers
 
-ba = subprocess.Popen('/opt/vyatta/sbin/vyatta-cjdns-readconf ' + sys.argv[1] + ' getAdminAddress', stdout=subprocess.PIPE)
-bp = subprocess.Popen('/opt/vyatta/sbin/vyatta-cjdns-readconf ' + sys.argv[1] + ' getAdminPassword', stdout=subprocess.PIPE)
-bindaddress = ba.stdout.readline.split(":")
-bindpassword = bp.stdout.readline
+bindaddress = os.popen('/opt/vyatta/sbin/vyatta-cjdns-readconf ' + sys.argv[1] + ' getAdminAddress').read().split(":")
+bindpassword = os.popen('/opt/vyatta/sbin/vyatta-cjdns-readconf ' + sys.argv[1] + ' getAdminPassword').read()
 cjdns = connect(ip=bindaddress[0], port=bindaddress[1], password=bindpassword)
 peerStats(cjdns);
 cjdns.disconnect()
