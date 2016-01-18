@@ -8,6 +8,12 @@ data = {}
 with open('/config/cjdroute.' + sys.argv[1] + '.conf') as data_file:
     data = json.load(data_file)
 
+def getAdminAddress():
+    return data['admin']['bind']
+
+def getAdminPassword():
+    return data['admin']['password']
+
 def getPublicKey():
     print data['publicKey']
 
@@ -16,13 +22,15 @@ def getPrivateKey():
 
 def getIPv6Address():
     print data['ipv6']
- 
+
 def showIdentity():
     print "IPv6 address: " + data['ipv6']
     print "Public key: " + data['publicKey']
     print "Private key: " + data['privateKey']
 
 try:
+    if sys.argv[2] == "getAdminAddress": getAdminAddress()
+    if sys.argv[2] == "getAdminPassword": getAdminPassword()
     if sys.argv[2] == "getPublicKey": getPublicKey()
     if sys.argv[2] == "getPrivateKey": getPrivateKey()
     if sys.argv[2] == "getIPv6Address": getIPv6Address()

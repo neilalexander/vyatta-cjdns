@@ -11,22 +11,13 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-import os
+import os, sys
 import json
 
 from time import sleep
 
 from cjdnsadmin.cjdnsadmin import connect
 from cjdnsadmin.publicToIp6 import PublicToIp6_convert
-
-def anonConnect(ip='127.0.0.1', port=11234):
-    path = os.path.expanduser('~/.cjdnsadmin')
-    try:
-        with open(path, 'r') as adminInfo:
-            data = json.load(adminInfo)
-        return connect(data['addr'], data['port'], '')
-    except IOError:
-        return connect(ip, int(port), '')
 
 def connect(ip='127.0.0.1', port=11234, password=''):
     from cjdnsadmin.cjdnsadmin import connectWithAdminInfo
@@ -72,6 +63,8 @@ def peerStats(cjdns,up=False):
 
     return allPeers
 
-cjdns=anonConnect()
+bindaddress=os.system('/opt/vyatta/sbin/vyatta-cjdns-readconf getAdminAddress').split(":")
+bindpassword=os.system('/opt/vyatta/sbin/vyatta-cjdns-readconf getAdminPassword')
+cjdns=connect(ip=bindaddress[0],port=bindaddress[1],password=bindpassword)
 peerStats(cjdns);
 cjdns.disconnect()
