@@ -1,7 +1,0 @@
-type: txt
-help: Password
-val_help: txt; Password
-
-create: /opt/vyatta/sbin/vyatta-cjdns-updateconf $VAR(../../@) updateAdminPassword $VAR(../@) $VAR(@)
-update: /opt/vyatta/sbin/vyatta-cjdns-updateconf $VAR(../../@) updateAdminPassword $VAR(../@) $VAR(@)
-delete: /opt/vyatta/sbin/vyatta-cjdns-updateconf $VAR(../../@) updateAdminPassword $VAR(../@) $VAR(@)
