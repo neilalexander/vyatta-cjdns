@@ -11,40 +11,67 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-import sys
-import getopt
-import cjdnsadmin.adminTools as at
+import os
+import json
 
-def main():
+from time import sleep
 
-    human_readable=False
+from cjdnsadmin.cjdnsadmin import connect
+from cjdnsadmin.publicToIp6 import PublicToIp6_convert
 
+def anonConnect(ip='127.0.0.1', port=11234):
+    path = os.path.expanduser('~/.cjdnsadmin')
     try:
-        opts, args = getopt.getopt(sys.argv[1:], "h" , ["humanreadable", "help"])
-    except getopt.GetoptError, e:
-        print(str(e))
-        print()
-        usage()
-        sys.exit(1)
+        with open(path, 'r') as adminInfo:
+            data = json.load(adminInfo)
+        return connect(data['addr'], data['port'], '')
+    except IOError:
+        return connect(ip, int(port), '')
 
-    for o, a in opts:
-        if o in ("-h", "--humanreadable"): human_readable=True
-        if o == ("--help"):
-            usage()
-            sys.exit(0)
+def connect(ip='127.0.0.1', port=11234, password=''):
+    from cjdnsadmin.cjdnsadmin import connectWithAdminInfo
+    return connectWithAdminInfo()
 
-
-
-    cjdns=at.anonConnect()
-    at.peerStats(cjdns,verbose=True,human_readable=human_readable);
+def disconnect(cjdns):
     cjdns.disconnect()
 
+def sizeof_fmt(num):
+    for x in ['B','KB','MB','GB','TB']:
+        if num < 1024.0:
+            return "%3.1f%s" % (num, x)
+        num /= 1024.0
 
-def usage():
-    print("usage: peerStats [-h]")
-    print("")
-    print("     -h, --humanreadable     human readable output of transmitted bytes")
-    print("     --help                  this list")
-    print("")
+def peerStats(cjdns,up=False):
+    allPeers = []
 
-main()
+    i = 0;
+    while True:
+        ps = cjdns.InterfaceController_peerStats(i);
+        peers = ps['peers']
+        for p in peers:
+            if p['state'] == 'UNRESPONSIVE' and up:
+                continue
+            allPeers.append(p)
+        if (not 'more' in ps):
+            break
+        i += 1
+
+    for peer in allPeers:
+        b_in  = peer['bytesIn']
+        b_out = peer['bytesOut']
+
+        print '%s\t%s %s (v%s, %s in, %s out)' % \
+        (
+            peer['user'],
+            PublicToIp6_convert(peer['publicKey']),
+            peer['state'],
+            peer['version'],
+            str(sizeof_fmt(b_in)),
+            str(sizeof_fmt(b_out))
+        )
+
+    return allPeers
+
+cjdns=anonConnect()
+peerStats(cjdns);
+cjdns.disconnect()

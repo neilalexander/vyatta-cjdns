@@ -1,0 +1,7 @@
+type: txt
+help: Login name (optional)
+val_help: txt; Login
+
+create: /opt/vyatta/sbin/vyatta-cjdns-updateconf $VAR(../../../@) updateUDPConnectToLogin $VAR(../../@) $VAR(../@) $VAR(@)
+update: /opt/vyatta/sbin/vyatta-cjdns-updateconf $VAR(../../../@) updateUDPConnectToLogin $VAR(../../@) $VAR(../@) $VAR(@)
+delete: /opt/vyatta/sbin/vyatta-cjdns-updateconf $VAR(../../../@) updateUDPConnectToLogin $VAR(../../@) $VAR(../@) $VAR(@)

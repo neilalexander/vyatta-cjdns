@@ -1,0 +1,7 @@
+type: txt
+help: Peer name
+val_help: txt; Peer name
+
+create: /opt/vyatta/sbin/vyatta-cjdns-updateconf $VAR(../../../@) updateUDPConnectToPeerName $VAR(../../@) $VAR(../@) $VAR(@)
+update: /opt/vyatta/sbin/vyatta-cjdns-updateconf $VAR(../../../@) updateUDPConnectToPeerName $VAR(../../@) $VAR(../@) $VAR(@)
+delete: /opt/vyatta/sbin/vyatta-cjdns-updateconf $VAR(../../../@) updateUDPConnectToPeerName $VAR(../../@) $VAR(../@) $VAR(@)

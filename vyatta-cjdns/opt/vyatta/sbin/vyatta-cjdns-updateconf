@@ -59,6 +59,16 @@ def updateUDPConnectToPublicKey(interface, endpoint, publicKey):
         data['interfaces']['UDPInterface'][int(interface)]['connectTo'][endpoint] = {}
     data['interfaces']['UDPInterface'][int(interface)]['connectTo'][endpoint]['publicKey'] = publicKey
 
+def updateUDPConnectToLogin(interface, endpoint, login):
+    if endpoint not in data['interfaces']['UDPInterface'][0]['connectTo']:
+        data['interfaces']['UDPInterface'][int(interface)]['connectTo'][endpoint] = {}
+    data['interfaces']['UDPInterface'][int(interface)]['connectTo'][endpoint]['login'] = login
+
+def updateUDPConnectToPeerName(interface, endpoint, peerName):
+    if endpoint not in data['interfaces']['UDPInterface'][0]['connectTo']:
+        data['interfaces']['UDPInterface'][int(interface)]['connectTo'][endpoint] = {}
+    data['interfaces']['UDPInterface'][int(interface)]['connectTo'][endpoint]['peerName'] = peerName
+
 def updateUDPConnectToPassword(interface, endpoint, password):
     if endpoint not in data['interfaces']['UDPInterface'][0]['connectTo']:
         data['interfaces']['UDPInterface'][int(interface)]['connectTo'][endpoint] = {}
@@ -128,6 +138,8 @@ try:
     if sys.argv[2] == "deleteUDPConnectTo": deleteUDPConnectTo(sys.argv[3], sys.argv[4])
     if sys.argv[2] == "updateUDPConnectToPublicKey": updateUDPConnectToPublicKey(sys.argv[3], sys.argv[4], sys.argv[5])
     if sys.argv[2] == "updateUDPConnectToPassword": updateUDPConnectToPassword(sys.argv[3], sys.argv[4], sys.argv[5])
+    if sys.argv[2] == "updateUDPConnectToLogin": updateUDPConnectToLogin(sys.argv[3], sys.argv[4], sys.argv[5])
+    if sys.argv[2] == "updateUDPConnectToPeerName": updateUDPConnectToPeerName(sys.argv[3], sys.argv[4], sys.argv[5])
     if sys.argv[2] == "updateUDPBindTo": updateUDPBindTo(sys.argv[3], sys.argv[4])
     if sys.argv[2] == "addEthernetInterface": addEthernetInterface(sys.argv[3])
     if sys.argv[2] == "deleteEthernetInterface": deleteEthernetInterface(sys.argv[3])
