@@ -10,6 +10,8 @@ SBINDIR=$DESTDIR/sbin/
 
 BUILDDIR_CJD=/tmp/cjdns
 
+PREFIX='mipsel-linux-gnu-'
+
 CFLAGS:=$(shell dpkg-buildflags --get CFLAGS)
 LDFLAGS:=$(shell dpkg-buildflags --get LDFLAGS)
 
@@ -33,7 +35,7 @@ cjdnsclone:
 	touch /tmp/cjdns/cjdroute
 
 cjdnsbuild:
-	cd $(BUILDDIR_CJD) && TARGET_ARCH='mips' CROSS_COMPILE='mipsel-linux-gnu-' Seccomp_NO=1 ./cross-do
+	cd $(BUILDDIR_CJD) && TARGET_ARCH='mips' CROSS_COMPILE=$(PREFIX) Seccomp_NO=1 ./cross-do
 
 cjdnsstage:
 	cp $(BUILDDIR_CJD)/cjdroute opt/vyatta/sbin/cjdroute

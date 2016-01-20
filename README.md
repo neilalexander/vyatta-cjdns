@@ -32,6 +32,30 @@ make
 ```
 The package `vyatta-cjdns.deb` will be created in the parent directory.
 
+### Building for EdgeRouter Lite
+
+On Debian Jessie, start by installing the build-essential package:
+```
+sudo apt-get update
+sudo apt-get install -y build-essential
+```
+So far the only proven working toolchain is the Codescape SDK 2015.01.7 (and 2015.06.05)
+
+Download the toolchain, assuming your homedir:
+```
+wget http://codescape-mips-sdk.imgtec.com/components/toolchain/2015.06-05/Codescape.GNU.Tools.Package.2015.06-05.for.MIPS.MTI.Linux.CentOS-5.x86_64.tar.gz
+tar xf Codescape.GNU.Tools.Package.2015.06-05.for.MIPS.MTI.Linux.CentOS-5.x86_64.tar.gz
+```
+add the bin dir to the path:
+```
+PATH=$HOME/mips-mti-linux-gnu/2015.06-05/bin:$PATH
+```
+Clone the repository, edit the file vyatta-cjdns/debian/control and change 'Architecture: mipsel' in 'Architecture: mips'
+Initiate the build by running:
+```
+PREFIX='mips-mti-linux-gnu-' make -e
+```
+
 ### Configuration
 
 To establish a peering is straight-forward; replace `bind-address a.b.c.d:e` with the address you want cjdroute to listen on in `ip:port` format and replace `peers a.b.c.d:e` with the `ip:port` address of your peer:
