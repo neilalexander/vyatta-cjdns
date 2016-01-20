@@ -1,9 +1,10 @@
 dependencies:
   pre:
+    - sudo rm -rf /etc/apt/sources.list.d/*
     - sudo sh -c 'echo "deb http://emdebian.org/tools/debian/ jessie main" >> /etc/apt/sources.list'
     - wget http://emdebian.org/tools/debian/emdebian-toolchain-archive.key
     - sudo apt-key add emdebian-toolchain-archive.key
-    - sudo sh -c "echo 'foreign-architecture mipsel' > /etc/dpkg/dpkg.cfg.d/multiarch"
+    - sudo sh -c "echo 'foreign-architecture mipsel' >> /etc/dpkg/dpkg.cfg.d/multiarch"
     - sudo apt-get update
     - sudo apt-get install crossbuild-essential-mipsel
   cache_directories:
