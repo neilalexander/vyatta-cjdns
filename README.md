@@ -8,14 +8,14 @@ At this time this package is in very early stages of development, but the ultima
 
 ### Compatibility
 
-|                       | Architecture | Compatible |                          Notes                         |
-|-----------------------|:------------:|:----------:|:------------------------------------------------------:|
-|    EdgeRouter X (ERX) |    mipsel    |     Yes    |                                                        |
-| EdgeRouter Lite (ERL) |    mips64    |      -     | Currently unable to locate a suitable mips64 toolchain |
+|                       | Architecture | Compatible |                          Notes                             |
+|-----------------------|:------------:|:----------:|:----------------------------------------------------------:|
+|    EdgeRouter X (ERX) |    mipsel    |     Yes    | Builds with crossbuild-essential, see below                |
+| EdgeRouter Lite (ERL) |    mips64    |     Yes    | Builds with Codescape SDK as mips32 which works, see below |
 
 ### Building for EdgeRouter X
 
-On Debian Jessie, start by installing the toolchain:
+On 64-bit Debian Jessie, start by installing the toolchain:
 ```
 echo "deb http://emdebian.org/tools/debian/ jessie main" >> /etc/apt/sources.list
 
@@ -34,27 +34,27 @@ The package `vyatta-cjdns.deb` will be created in the parent directory.
 
 ### Building for EdgeRouter Lite
 
-On Debian Jessie, start by installing the build-essential package:
+On 64-bit Debian Jessie, start by installing the build-essential package:
 ```
 sudo apt-get update
 sudo apt-get install -y build-essential
 ```
-So far the only proven working toolchain is the Codescape SDK 2015.01.7 (and 2015.06.05)
+So far the only proven working toolchain is the Codescape SDK 2015.01.7 (and 2015.06.05).
 
 Download the toolchain, assuming your homedir:
 ```
 wget http://codescape-mips-sdk.imgtec.com/components/toolchain/2015.06-05/Codescape.GNU.Tools.Package.2015.06-05.for.MIPS.MTI.Linux.CentOS-5.x86_64.tar.gz
 tar xf Codescape.GNU.Tools.Package.2015.06-05.for.MIPS.MTI.Linux.CentOS-5.x86_64.tar.gz
 ```
-add the bin dir to the path:
+Add the bin dir to your `PATH` variable:
 ```
 PATH=$HOME/mips-mti-linux-gnu/2015.06-05/bin:$PATH
 ```
-Clone the repository, edit the file vyatta-cjdns/debian/control and change 'Architecture: mipsel' in 'Architecture: mips'
-Initiate the build by running:
+Clone the repository, edit the file `vyatta-cjdns/debian/control` and change `Architecture: mipsel` to `Architecture: mips`, and then initiate the build by running:
 ```
 PREFIX='mips-mti-linux-gnu-' make -e
 ```
+The package `vyatta-cjdns.deb` will be created in the parent directory.
 
 ### Configuration
 
