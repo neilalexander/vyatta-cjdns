@@ -8,10 +8,10 @@ At this time this package is in very early stages of development, but the ultima
 
 ### Compatibility
 
-|                       | Architecture | Compatible |                          Notes                             |
-|-----------------------|:------------:|:----------:|:----------------------------------------------------------:|
-|    EdgeRouter X (ERX) |    mipsel    |     Yes    | Builds with crossbuild-essential, see below                |
-| EdgeRouter Lite (ERL) |    mips64    |     Yes    | Builds with Codescape SDK as mips32 which works, see below |
+|                       | Architecture | Compatible |                      Notes                     |
+|-----------------------|:------------:|:----------:|:----------------------------------------------:|
+|    EdgeRouter X (ERX) |    mipsel    |     Yes    | Builds with crossbuild-essential, see below    |
+| EdgeRouter Lite (ERL) |    mips64    |     Yes    | Builds with Codescape SDK as mips32, see below |
 
 ### Building for EdgeRouter X
 
@@ -110,11 +110,16 @@ To restart a cjdns tunnel, in operational view:
 ```
 restart cjdns tun0
 ```
+The cjdroute daemon is still in development and is prone to crashes sometimes. The easiest way to make sure that the process is restarted if it crashes is to schedule the `vyatta-check-cjdns` script to run at a regular interval:
+```
+configure
+set system task-scheduler task check-cjdns executable path /opt/vyatta/sbin/vyatta-check-cjdns
+set system task-scheduler task check-cjdns interval 1m
+commit
+```
 
 ### Footnotes
 
 There is very little input validation right now on the configuration, so if you enter badly-formed config then `cjdroute` will simply fail to start.
 
 You may also need to manually adjust your firewall to allow traffic on the `bind-address` that you specified.
-
-The EdgeRouter X claims architecture `mipsel`, but the EdgeRouter Lite claims architecture `mips64`. Not currently sure how to cross-compile for `mips64` using crossbuild on Jessie. Any thoughts appreciated.
