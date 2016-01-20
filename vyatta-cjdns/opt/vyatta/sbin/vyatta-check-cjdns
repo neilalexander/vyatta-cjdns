@@ -1,0 +1,14 @@
+#!/bin/sh
+
+if [ `ls /config/cjdroute.*.conf 2>/dev/null | wc -l` -gt 0 ];
+then
+    ls /config/cjdroute.*.conf | awk -v FS="(cjdroute.|.conf)" '{print $3}' | while read file;
+    do
+        if [ `cat /var/run/cjdroute.$file.pid | xargs pgrep -P 2>/dev/null | wc -l` -eq 0 ];
+        then
+            nohup /opt/vyatta/sbin/cjdroute --nobg &>/tmp/cjdroute.$file.log < /config/cjdroute.$file.conf &
+            if [ $? -eq 0 ]; then echo $! > /var/run/cjdroute.$file.pid;
+            else rm -f /var/run/cjdroute.$1.pid &>/dev/null; fi
+        fi
+    done
+fi
