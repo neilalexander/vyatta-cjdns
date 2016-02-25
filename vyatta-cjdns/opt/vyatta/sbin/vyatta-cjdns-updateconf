@@ -8,12 +8,13 @@ data = {}
 with open('/config/cjdroute.' + sys.argv[1] + '.conf') as data_file:
     data = json.load(data_file)
 
-def setStandardConfiguration():
+def setStandardConfiguration(interface):
     data['logging']['logTo'] = ""
     data['noBackground'] = 1
     data['interfaces']['UDPInterface'] = []
     data['interfaces']['ETHInterface'] = []
     data['authorizedPasswords'] = []
+    data['router']['interface']['tunDevice'] = interface
 
 def addAuthorizedPassword(user, password):
     data['authorizedPasswords'].append(
@@ -128,7 +129,7 @@ def updateTunDevice(device):
     data['router']['interface']['tunDevice'] = device
 
 try:
-    if sys.argv[2] == "setStandardConfiguration": setStandardConfiguration()
+    if sys.argv[2] == "setStandardConfiguration": setStandardConfiguration(sys.argv[1])
     if sys.argv[2] == "addAuthorizedPassword": addAuthorizedPassword(sys.argv[3], sys.argv[4])
     if sys.argv[2] == "updateAuthorizedPassword": updateAuthorizedPassword(sys.argv[3], sys.argv[4])
     if sys.argv[2] == "deleteAuthorizedPassword": deleteAuthorizedPassword(sys.argv[3])
