@@ -1,17 +1,21 @@
 #!/bin/sh
 
-echo "cjdns generate conf: $1"
-
-/opt/vyatta/sbin/cjdroute --genconf | /opt/vyatta/sbin/cjdroute --cleanconf > /config/cjdroute.$1.conf
-/opt/vyatta/sbin/vyatta-cjdns-updateconf $1 setStandardConfiguration
-
-cli-shell-api inSession
-if [ $? -ne 0 ]; then
-	echo "Unable to set up API session to read back config"
+if [ -f /tmp/foo.txt ]; then
+	echo "cjdns generate conf: /config/cjdroute.$1.conf already exists, leaving alone"
 else
-	${vyatta_sbindir}/my_set interfaces cjdns $1 publickey `/opt/vyatta/sbin/vyatta-cjdns-readconf $1 getPublicKey`
-	${vyatta_sbindir}/my_set interfaces cjdns $1 privatekey `/opt/vyatta/sbin/vyatta-cjdns-readconf $1 getPrivateKey`
-	${vyatta_sbindir}/my_set interfaces cjdns $1 ipv6 `/opt/vyatta/sbin/vyatta-cjdns-readconf $1 getIPv6Address`
-	${vyatta_sbindir}/my_set interfaces cjdns $1 admin-bind-address `/opt/vyatta/sbin/vyatta-cjdns-readconf $1 getAdminAddress`
-	${vyatta_sbindir}/my_set interfaces cjdns $1 admin-password `/opt/vyatta/sbin/vyatta-cjdns-readconf $1 getAdminPassword`
+	echo "cjdns generate conf: $1"
+
+	/opt/vyatta/sbin/cjdroute --genconf | /opt/vyatta/sbin/cjdroute --cleanconf > /config/cjdroute.$1.conf
+	/opt/vyatta/sbin/vyatta-cjdns-updateconf $1 setStandardConfiguration
+
+	cli-shell-api inSession
+	if [ $? -ne 0 ]; then
+		echo "Unable to set up API session to read back config"
+	else
+		${vyatta_sbindir}/my_set interfaces cjdns $1 publickey `/opt/vyatta/sbin/vyatta-cjdns-readconf $1 getPublicKey`
+		${vyatta_sbindir}/my_set interfaces cjdns $1 privatekey `/opt/vyatta/sbin/vyatta-cjdns-readconf $1 getPrivateKey`
+		${vyatta_sbindir}/my_set interfaces cjdns $1 ipv6 `/opt/vyatta/sbin/vyatta-cjdns-readconf $1 getIPv6Address`
+		${vyatta_sbindir}/my_set interfaces cjdns $1 admin-bind-address `/opt/vyatta/sbin/vyatta-cjdns-readconf $1 getAdminAddress`
+		${vyatta_sbindir}/my_set interfaces cjdns $1 admin-password `/opt/vyatta/sbin/vyatta-cjdns-readconf $1 getAdminPassword`
+	fi
 fi
