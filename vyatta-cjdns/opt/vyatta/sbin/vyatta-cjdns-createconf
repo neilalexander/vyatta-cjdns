@@ -1,6 +1,6 @@
 #!/bin/sh
 
-if [ -f /tmp/foo.txt ]; then
+if [ -f /config/cjdroute.$1.conf ]; then
 	echo "cjdns generate conf: /config/cjdroute.$1.conf already exists, leaving alone"
 else
 	echo "cjdns generate conf: $1"
