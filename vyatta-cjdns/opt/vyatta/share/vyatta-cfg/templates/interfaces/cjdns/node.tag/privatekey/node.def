@@ -2,6 +2,8 @@ type: txt
 help: cjdns private key
 val_help: txt; Private key
 
+priority: 999
+
 create: /opt/vyatta/sbin/vyatta-cjdns-updateconf $VAR(../@) updatePrivateKey $VAR(@)
 update: /opt/vyatta/sbin/vyatta-cjdns-updateconf $VAR(../@) updatePrivateKey $VAR(@)
 update: /opt/vyatta/sbin/vyatta-cjdns-updateconf $VAR(../@) updateIPv6Address $VAR(@)

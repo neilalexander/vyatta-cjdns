@@ -2,6 +2,8 @@ type: txt
 help: Bind address (in ip:port format)
 val_help: txt; Bind address
 
+priority: 999
+
 create: /opt/vyatta/sbin/vyatta-cjdns-updateconf $VAR(../@) updateAdminBindAddress $VAR(@)
 update: /opt/vyatta/sbin/vyatta-cjdns-updateconf $VAR(../@) updateAdminBindAddress $VAR(@)
 delete: /opt/vyatta/sbin/vyatta-cjdns-updateconf $VAR(../@) updateAdminBindAddress $VAR(@)

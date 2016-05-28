@@ -2,6 +2,8 @@ type: txt
 help: Password
 val_help: txt; Password
 
+priority: 999
+
 create: /opt/vyatta/sbin/vyatta-cjdns-updateconf $VAR(../@) updateAdminPassword $VAR(@)
 update: /opt/vyatta/sbin/vyatta-cjdns-updateconf $VAR(../@) updateAdminPassword $VAR(@)
 delete: /opt/vyatta/sbin/vyatta-cjdns-updateconf $VAR(../@) updateAdminPassword $VAR(@)
