@@ -30,7 +30,10 @@ Compile the package then by cloning the repository and running 'make':
 ```
 make
 ```
-The package `vyatta-cjdns.deb` will be created in the parent directory.
+The package `vyatta-cjdns.deb` will be created in the parent directory. Copy it to the EdgeRouter and install it:
+```
+sudo dpkg -i vyatta-cjdns.deb
+```
 
 ### Building for EdgeRouter Lite
 
@@ -54,7 +57,10 @@ Clone the repository, edit the file `vyatta-cjdns/debian/control` and change `Ar
 ```
 PREFIX='mips-mti-linux-gnu-' make -e
 ```
-The package `vyatta-cjdns.deb` will be created in the parent directory.
+The package `vyatta-cjdns.deb` will be created in the parent directory. Copy it to the EdgeRouter and install it:
+```
+sudo dpkg -i vyatta-cjdns.deb
+```
 
 ### Configuration
 
