@@ -110,11 +110,19 @@ def deleteEthernetInterface(interface):
             data['interfaces']['ETHInterface'][int(interface)] = {}
 
 def addIpTunnelProviderIPv4Prefix(publickey, ipv4prefix):
-    data['router']['ipTunnel']['allowedConnections'][] = {
-      "publicKey": publickey,
-      "ip4Address": ipv4prefix.split("/")[0],
-      "ip4Prefix": ipv4prefix.split("/")[1]
-    }
+    set = 0
+    for i in range(len(data['router']['ipTunnel']['allowedConnections'])):
+        if data['router']['ipTunnel']['allowedConnections'][i]['publicKey'] == publickey:
+            data['router']['ipTunnel']['allowedConnections'][i]['ip4Address'] = ipv4prefix.split("/")[0]
+            data['router']['ipTunnel']['allowedConnections'][i]['ip4Prefix'] = ipv4prefix.split("/")[1]
+            set = 1
+            break
+    if set == 0:
+        data['router']['ipTunnel']['allowedConnections'][] = {
+          "publicKey": publickey,
+          "ip4Address": ipv4prefix.split("/")[0],
+          "ip4Prefix": ipv4prefix.split("/")[1]
+        }
 
 def delIpTunnelProviderIPv4Prefix(publickey):
     for i in range(len(data['router']['ipTunnel']['allowedConnections'])):
@@ -126,11 +134,19 @@ def delIpTunnelProviderIPv4Prefix(publickey):
                 del data['router']['ipTunnel']['allowedConnections'][i]['ip4Prefix']
 
 def addIpTunnelProviderIPv6Prefix(publickey, ipv6prefix):
-    data['router']['ipTunnel']['allowedConnections'][] = {
-      "publicKey": publickey,
-      "ip6Address": ipv6prefix.split("/")[0],
-      "ip6Prefix": ipv6prefix.split("/")[1]
-    }
+    set = 0
+    for i in range(len(data['router']['ipTunnel']['allowedConnections'])):
+        if data['router']['ipTunnel']['allowedConnections'][i]['publicKey'] == publickey:
+            data['router']['ipTunnel']['allowedConnections'][i]['ip6Address'] = ipv6prefix.split("/")[0]
+            data['router']['ipTunnel']['allowedConnections'][i]['ip6Prefix'] = ipv6prefix.split("/")[1]
+            set = 1
+            break
+    if set == 0:
+        data['router']['ipTunnel']['allowedConnections'][] = {
+          "publicKey": publickey,
+          "ip6Address": ipv6prefix.split("/")[0],
+          "ip6Prefix": ipv6prefix.split("/")[1]
+        }
 
 def delIpTunnelProviderIPv6Prefix(publickey):
     for i in range(len(data['router']['ipTunnel']['allowedConnections'])):
