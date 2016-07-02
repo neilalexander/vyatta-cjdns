@@ -7,7 +7,7 @@ then
         if [ `cat /var/run/cjdroute.$file.pid | xargs pgrep -P 2>/dev/null | wc -l` -eq 0 ];
         then
             echo "The cjdroute daemon for $file was not running, restarting..."
-            nohup /opt/vyatta/sbin/cjdroute --nobg &>/tmp/cjdroute.$file.log < /config/cjdroute.$file.conf &
+            nohup nice -5 /opt/vyatta/sbin/cjdroute --nobg &>/tmp/cjdroute.$file.log < /config/cjdroute.$file.conf &
             echo $! > /var/run/cjdroute.$file.pid
         fi
     done
