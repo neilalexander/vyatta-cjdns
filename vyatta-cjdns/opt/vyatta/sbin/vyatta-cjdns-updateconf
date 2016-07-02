@@ -124,7 +124,7 @@ def addIpTunnelProviderIPv4Prefix(publickey, ipv4prefix):
           "ip4Prefix": ipv4prefix.split("/")[1]
         }
 
-def delIpTunnelProviderIPv4Prefix(publickey):
+def deleteIpTunnelProviderIPv4Prefix(publickey):
     for i in range(len(data['router']['ipTunnel']['allowedConnections'])):
         if data['router']['ipTunnel']['allowedConnections'][i]['publicKey'] == publickey:
             if not data['router']['ipTunnel']['allowedConnections'][i]['ip6Address']:
@@ -148,7 +148,7 @@ def addIpTunnelProviderIPv6Prefix(publickey, ipv6prefix):
           "ip6Prefix": ipv6prefix.split("/")[1]
         }
 
-def delIpTunnelProviderIPv6Prefix(publickey):
+def deleteIpTunnelProviderIPv6Prefix(publickey):
     for i in range(len(data['router']['ipTunnel']['allowedConnections'])):
         if data['router']['ipTunnel']['allowedConnections'][i]['publicKey'] == publickey:
             if not data['router']['ipTunnel']['allowedConnections'][i]['ip4Address']:
@@ -192,6 +192,10 @@ try:
     if sys.argv[2] == "updateUDPBindTo": updateUDPBindTo(sys.argv[3], sys.argv[4])
     if sys.argv[2] == "addEthernetInterface": addEthernetInterface(sys.argv[3])
     if sys.argv[2] == "deleteEthernetInterface": deleteEthernetInterface(sys.argv[3])
+    if sys.argv[2] == "addIpTunnelProviderIPv4Prefix": addIpTunnelProviderIPv4Prefix(sys.argv[3], sys.argv[4])
+    if sys.argv[2] == "deleteIpTunnelProviderIPv4Prefix": deleteIpTunnelProviderIPv4Prefix(sys.argv[3], sys.argv[4])
+    if sys.argv[2] == "addIpTunnelProviderIPv6Prefix": addIpTunnelProviderIPv6Prefix(sys.argv[3], sys.argv[4])
+    if sys.argv[2] == "deleteIpTunnelProviderIPv6Prefix": deleteIpTunnelProviderIPv6Prefix(sys.argv[3], sys.argv[4])
     if sys.argv[2] == "updateEthernetBindTo": updateEthernetBindTo(sys.argv[3], sys.argv[4])
     if sys.argv[2] == "updateEthernetBeacon": updateEthernetBeacon(sys.argv[3], sys.argv[4])
     if sys.argv[2] == "updateAdminBindAddress": updateAdminBindAddress(sys.argv[3])
