@@ -1,0 +1,3 @@
+type: ipv6net
+help: IPv6 prefix to provide to remote client
+val_help: ipv6net; IPv6 prefix to provide to remote client

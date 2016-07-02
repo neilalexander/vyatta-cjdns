@@ -109,6 +109,38 @@ def deleteEthernetInterface(interface):
         if type(data['interfaces']['ETHInterface'][int(interface)]) is dict:
             data['interfaces']['ETHInterface'][int(interface)] = {}
 
+def addIpTunnelProviderIPv4Prefix(publickey, ipv4prefix):
+    data['router']['ipTunnel']['allowedConnections'][] = {
+      "publicKey": publickey,
+      "ip4Address": ipv4prefix.split("/")[0],
+      "ip4Prefix": ipv4prefix.split("/")[1]
+    }
+
+def delIpTunnelProviderIPv4Prefix(publickey):
+    for i in range(len(data['router']['ipTunnel']['allowedConnections'])):
+        if data['router']['ipTunnel']['allowedConnections'][i]['publicKey'] == publickey:
+            if not data['router']['ipTunnel']['allowedConnections'][i]['ip6Address']:
+                del data['router']['ipTunnel']['allowedConnections'][i]
+            else
+                del data['router']['ipTunnel']['allowedConnections'][i]['ip4Address']
+                del data['router']['ipTunnel']['allowedConnections'][i]['ip4Prefix']
+
+def addIpTunnelProviderIPv6Prefix(publickey, ipv6prefix):
+    data['router']['ipTunnel']['allowedConnections'][] = {
+      "publicKey": publickey,
+      "ip6Address": ipv6prefix.split("/")[0],
+      "ip6Prefix": ipv6prefix.split("/")[1]
+    }
+
+def delIpTunnelProviderIPv6Prefix(publickey):
+    for i in range(len(data['router']['ipTunnel']['allowedConnections'])):
+        if data['router']['ipTunnel']['allowedConnections'][i]['publicKey'] == publickey:
+            if not data['router']['ipTunnel']['allowedConnections'][i]['ip4Address']:
+                del data['router']['ipTunnel']['allowedConnections'][i]
+            else
+                del data['router']['ipTunnel']['allowedConnections'][i]['ip6Address']
+                del data['router']['ipTunnel']['allowedConnections'][i]['ip6Prefix']
+
 def updateAdminBindAddress(address):
     data['admin']['bind'] = address
 

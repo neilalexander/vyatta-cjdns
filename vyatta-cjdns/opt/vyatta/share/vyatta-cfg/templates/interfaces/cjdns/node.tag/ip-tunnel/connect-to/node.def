@@ -1,0 +1,5 @@
+type: txt
+help: Public key of remote provider to request address from
+val_help: txt; Public key (ending in .k)
+
+priority: 999
