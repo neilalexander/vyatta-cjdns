@@ -3,4 +3,4 @@ help: Provide IPv6 prefix to remote client
 val_help: ipv6net; IPv6 prefix to provide to remote client
 
 create: /opt/vyatta/sbin/vyatta-cjdns-updateconf $VAR(../../@) addIpTunnelProviderIPv6Prefix $VAR(../@) $VAR(@)
-delete: /opt/vyatta/sbin/vyatta-cjdns-updateconf $VAR(../../@) deleteIpTunnelProviderIPv6Prefix $VAR(../@) $VAR(@)
+delete: /opt/vyatta/sbin/vyatta-cjdns-updateconf $VAR(../../@) deleteIpTunnelProviderIPv6Prefix $VAR(../@)
