@@ -64,6 +64,10 @@ sudo dpkg -i vyatta-cjdns.deb
 
 ### Configuration
 
+All configuration is entered through the CLI. `set` commands, as listed below, will add new configuration and the cjdroute configuration file will be updated automatically. To remove configuration, for instance to remove a peering, authorised password or IP tunnel setting, replace the `set` keyword with `delete`.
+
+cjdroute is restarted automatically after a configuration change is made.
+
 #### Peerings
 
 To establish a peering is straight-forward; replace `bind-address a.b.c.d:e` with the address you want cjdroute to listen on in `ip:port` format and replace `peers a.b.c.d:e` with the `ip:port` address of your peer:
