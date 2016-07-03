@@ -1,0 +1,4 @@
+help: Connect to remote provider
+
+create: /opt/vyatta/sbin/vyatta-cjdns-updateconf $VAR(../../@) addIpTunnelConnectTo $VAR(../@)
+delete: /opt/vyatta/sbin/vyatta-cjdns-updateconf $VAR(../../@) deleteIpTunnelConnectTo $VAR(../@)
