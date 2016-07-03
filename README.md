@@ -118,25 +118,24 @@ set interfaces cjdns tun0 firewall local ipv6-name CJD_LOCAL
 To connect to and receive a tunnel prefix from a remote peer, where `xxx.k` is the remote public key:
 ```
 configure
-set interfaces cjdns tun0 ip-tunnel xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx.k connect
+set interfaces cjdns tun0 ip-tunnel xxx.k connect
 commit
 ```
 To provide an IPv4 tunnel prefix to a remote peer, where `xxx.k` is the remote public key:
 ```
 configure
-set interfaces cjdns tun0 ip-tunnel xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx.k provide-ipv4-prefix x.x.x.x/x
+set interfaces cjdns tun0 ip-tunnel xxx.k provide-ipv4-prefix x.x.x.x/x
 commit
 ```
 To provide an IPv6 tunnel prefix to a remote peer where, `xxx.k` is the remote public key:
 ```
 configure
-set interfaces cjdns tun0 ip-tunnel xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx.k provide-ipv6-prefix x::x/x
+set interfaces cjdns tun0 ip-tunnel xxx.k provide-ipv6-prefix x::x/x
 commit
 ```
 
 #### Operational Commands
 
-```
 To see information about peerings, in operational view:
 ```
 show interfaces cjdns tun0 peers
