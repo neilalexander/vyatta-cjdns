@@ -136,7 +136,7 @@ def deleteIpTunnelProviderIPv4Prefix(publickey):
         if data['router']['ipTunnel']['allowedConnections'][i]['publicKey'] == publickey:
             if not data['router']['ipTunnel']['allowedConnections'][i]['ip6Address']:
                 del data['router']['ipTunnel']['allowedConnections'][i]
-            else
+            else:
                 del data['router']['ipTunnel']['allowedConnections'][i]['ip4Address']
                 del data['router']['ipTunnel']['allowedConnections'][i]['ip4Prefix']
 
@@ -160,7 +160,7 @@ def deleteIpTunnelProviderIPv6Prefix(publickey):
         if data['router']['ipTunnel']['allowedConnections'][i]['publicKey'] == publickey:
             if not data['router']['ipTunnel']['allowedConnections'][i]['ip4Address']:
                 del data['router']['ipTunnel']['allowedConnections'][i]
-            else
+            else:
                 del data['router']['ipTunnel']['allowedConnections'][i]['ip6Address']
                 del data['router']['ipTunnel']['allowedConnections'][i]['ip6Prefix']
 
