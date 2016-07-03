@@ -149,7 +149,7 @@ def deleteIpTunnelProviderIPv4Prefix(publickey):
             del data['router']['ipTunnel']['allowedConnections'][i]['ip4Prefix']
             try:
                 assert data['router']['ipTunnel']['allowedConnections'][i]['ip6Address']
-            catch KeyError:
+            except KeyError:
                 del data['router']['ipTunnel']['allowedConnections'][i]
 
 def deleteIpTunnelProviderIPv6Prefix(publickey):
@@ -159,7 +159,7 @@ def deleteIpTunnelProviderIPv6Prefix(publickey):
             del data['router']['ipTunnel']['allowedConnections'][i]['ip6Prefix']
             try:
                 assert data['router']['ipTunnel']['allowedConnections'][i]['ip4Address']
-            catch KeyError:
+            except KeyError:
                 del data['router']['ipTunnel']['allowedConnections'][i]
 
 def updateAdminBindAddress(address):
