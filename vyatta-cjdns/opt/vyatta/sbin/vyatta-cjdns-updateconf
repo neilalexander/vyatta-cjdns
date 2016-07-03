@@ -121,7 +121,7 @@ def addIpTunnelProviderIPv4Prefix(publickey, ipv4prefix):
     for i in range(len(data['router']['ipTunnel']['allowedConnections'])):
         if data['router']['ipTunnel']['allowedConnections'][i]['publicKey'] == publickey:
             data['router']['ipTunnel']['allowedConnections'][i]['ip4Address'] = ipv4prefix.split("/")[0]
-            data['router']['ipTunnel']['allowedConnections'][i]['ip4Prefix'] = ipv4prefix.split("/")[1]
+            data['router']['ipTunnel']['allowedConnections'][i]['ip4Prefix'] = int(ipv4prefix.split("/")[1])
             set = 1
             break
     if set == 0:
@@ -145,7 +145,7 @@ def addIpTunnelProviderIPv6Prefix(publickey, ipv6prefix):
     for i in range(len(data['router']['ipTunnel']['allowedConnections'])):
         if data['router']['ipTunnel']['allowedConnections'][i]['publicKey'] == publickey:
             data['router']['ipTunnel']['allowedConnections'][i]['ip6Address'] = ipv6prefix.split("/")[0]
-            data['router']['ipTunnel']['allowedConnections'][i]['ip6Prefix'] = ipv6prefix.split("/")[1]
+            data['router']['ipTunnel']['allowedConnections'][i]['ip6Prefix'] = int(ipv6prefix.split("/")[1])
             set = 1
             break
     if set == 0:

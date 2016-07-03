@@ -1,6 +1,4 @@
-type: txt
-help: Connect to a remote provider
-val_help: txt; Public key (ending in .k)
+help: Connect to remote provider
 
 create: /opt/vyatta/sbin/vyatta-cjdns-updateconf $VAR(../../@) addIpTunnelConnectTo $VAR(../@)
 delete: /opt/vyatta/sbin/vyatta-cjdns-updateconf $VAR(../../@) deleteIpTunnelConnectTo $VAR(../@)
