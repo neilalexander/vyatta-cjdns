@@ -1,3 +1,0 @@
-type: ipv6net
-help: Provide IPv6 prefix to remote client
-val_help: ipv6net; IPv6 prefix to provide to remote client

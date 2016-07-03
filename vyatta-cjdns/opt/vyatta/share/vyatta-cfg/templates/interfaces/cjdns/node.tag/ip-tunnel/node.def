@@ -1,3 +1,4 @@
+tag:
 type: txt
 help: Public key of cjdns peer to configure IP tunneling with
 val_help: txt; Public key (ending in .k)

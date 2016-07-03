@@ -1,5 +1,0 @@
-type: txt
-help: Connect to a remote provider
-val_help: txt; Public key (ending in .k)
-
-priority: 999

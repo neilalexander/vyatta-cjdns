@@ -109,6 +109,13 @@ def deleteEthernetInterface(interface):
         if type(data['interfaces']['ETHInterface'][int(interface)]) is dict:
             data['interfaces']['ETHInterface'][int(interface)] = {}
 
+def addIpTunnelConnectTo(publickey):
+    if endpoint not in data['router']['ipTunnel']['outgoingConnections']:
+        data['router']['ipTunnel']['outgoingConnections'][] = publickey
+
+def deleteIpTunnelConnectTo(publickey):
+    data['router']['ipTunnel']['outgoingConnections'].remove(publickey)
+
 def addIpTunnelProviderIPv4Prefix(publickey, ipv4prefix):
     set = 0
     for i in range(len(data['router']['ipTunnel']['allowedConnections'])):
@@ -192,6 +199,8 @@ try:
     if sys.argv[2] == "updateUDPBindTo": updateUDPBindTo(sys.argv[3], sys.argv[4])
     if sys.argv[2] == "addEthernetInterface": addEthernetInterface(sys.argv[3])
     if sys.argv[2] == "deleteEthernetInterface": deleteEthernetInterface(sys.argv[3])
+    if sys.argv[2] == "addIpTunnelConnectTo": addIpTunnelConnectTo(sys.argv[3])
+    if sys.argv[2] == "deleteIpTunnelConnectTo": deleteIpTunnelConnectTo(sys.argv[3])
     if sys.argv[2] == "addIpTunnelProviderIPv4Prefix": addIpTunnelProviderIPv4Prefix(sys.argv[3], sys.argv[4])
     if sys.argv[2] == "deleteIpTunnelProviderIPv4Prefix": deleteIpTunnelProviderIPv4Prefix(sys.argv[3], sys.argv[4])
     if sys.argv[2] == "addIpTunnelProviderIPv6Prefix": addIpTunnelProviderIPv6Prefix(sys.argv[3], sys.argv[4])
