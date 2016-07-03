@@ -64,6 +64,8 @@ sudo dpkg -i vyatta-cjdns.deb
 
 ### Configuration
 
+#### Peerings
+
 To establish a peering is straight-forward; replace `bind-address a.b.c.d:e` with the address you want cjdroute to listen on in `ip:port` format and replace `peers a.b.c.d:e` with the `ip:port` address of your peer:
 ```
 configure
@@ -79,6 +81,16 @@ set interfaces cjdns tun0 ethernet-interface 0 bind-interface switch0
 set interfaces cjdns tun0 ethernet-interface 0 beacon 2
 commit
 ```
+To configure new authorized passwords for incoming connections:
+```
+configure
+set interfaces cjdns tun0 authorized-password user1 password password1
+set interfaces cjdns tun0 authorized-password user2 password password2
+commit
+```
+
+#### Identity
+
 An IPv6 address and a keypair are automatically generated when you create a new cjdns interface. The `publickey`, `privatekey` and `ipv6` fields will be automatically populated with these. To manually configure your own IPv6 address and keypair (i.e. to bring in an existing keypair from another machine):
 ```
 configure
@@ -87,13 +99,9 @@ set interfaces cjdns tun0 privatekey xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
 set interfaces cjdns tun0 ipv6 xxxx:xxxx:xxxx:xxxx:xxxx:xxxx:xxxx:xxxx
 commit
 ```
-To configure new authorized passwords for incoming connections:
-```
-configure
-set interfaces cjdns tun0 authorized-password user1 password password1
-set interfaces cjdns tun0 authorized-password user2 password password2
-commit
-```
+
+#### Firewall
+
 An example stateful firewall configuration that will block unexpected incoming traffic on the cjdns interface, i.e. to prevent other people from reaching your ssh or Web UI ports:
 ```
 set firewall ipv6-name CJD_LOCAL default-action drop
@@ -103,6 +111,31 @@ set firewall ipv6-name CJD_LOCAL rule 10 state related enable
 set firewall ipv6-name CJD_LOCAL rule 20 action drop
 set firewall ipv6-name CJD_LOCAL rule 20 state invalid enable
 set interfaces cjdns tun0 firewall local ipv6-name CJD_LOCAL
+```
+
+#### IP Tunnel
+
+To connect to and receive a tunnel prefix from a remote peer, where `xxx.k` is the remote public key:
+```
+configure
+set interfaces cjdns tun0 ip-tunnel xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx.k connect
+commit
+```
+To provide an IPv4 tunnel prefix to a remote peer, where `xxx.k` is the remote public key:
+```
+configure
+set interfaces cjdns tun0 ip-tunnel xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx.k provide-ipv4-prefix x.x.x.x/x
+commit
+```
+To provide an IPv6 tunnel prefix to a remote peer where, `xxx.k` is the remote public key:
+```
+configure
+set interfaces cjdns tun0 ip-tunnel xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx.k provide-ipv6-prefix x::x/x
+commit
+```
+
+#### Operational Commands
+
 ```
 To see information about peerings, in operational view:
 ```
@@ -116,6 +149,9 @@ To restart a cjdns tunnel, in operational view:
 ```
 restart cjdns tun0
 ```
+
+#### Crash Detection
+
 The cjdroute daemon is still in development and is prone to crashes sometimes. The easiest way to make sure that the process is restarted if it crashes is to schedule the `vyatta-check-cjdns` script to run at a regular interval:
 ```
 configure
