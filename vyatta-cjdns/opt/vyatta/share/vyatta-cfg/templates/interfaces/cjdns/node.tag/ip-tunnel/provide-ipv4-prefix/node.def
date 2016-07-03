@@ -1,3 +1,3 @@
 type: ipv4net
-help: IPv4 prefix to provide to remote client
+help: Provide IPv4 prefix to remote client
 val_help: ipv4net; IPv4 prefix to provide to remote client
