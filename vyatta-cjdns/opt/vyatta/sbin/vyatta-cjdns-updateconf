@@ -110,7 +110,7 @@ def deleteEthernetInterface(interface):
             data['interfaces']['ETHInterface'][int(interface)] = {}
 
 def addIpTunnelConnectTo(publickey):
-    if endpoint not in data['router']['ipTunnel']['outgoingConnections']:
+    if publickey not in data['router']['ipTunnel']['outgoingConnections']:
         data['router']['ipTunnel']['outgoingConnections'].append(publickey)
 
 def deleteIpTunnelConnectTo(publickey):
