@@ -17,6 +17,7 @@ def setStandardConfiguration(interface):
     data['router']['interface']['tunDevice'] = interface
 
 def addAuthorizedPassword(user, password):
+    deleteAuthorizedPassword(user)
     data['authorizedPasswords'].append(
         { "user": user, "password": password }
     )
