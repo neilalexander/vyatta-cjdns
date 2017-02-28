@@ -68,14 +68,26 @@ All configuration is entered through the CLI. `set` commands, as listed below, w
 
 cjdroute is restarted automatically after a configuration change is made.
 
+### Initial
+
+Start by creating the default configuration on the interface:
+```
+configure
+set interfaces cjdns tun0
+commit
+```
+This automatically populates the IPv6 address, public key, private key and admin socket details, as shown with `show interfaces cjdns tun0` in the configure view. 
+
 #### Peerings
 
-To establish a peering is straight-forward; replace `bind-address a.b.c.d:e` with the address you want cjdroute to listen on in `ip:port` format and replace `peers a.b.c.d:e` with the `ip:port` address of your peer:
+To establish a peering is straight-forward; replace `bind-address a.b.c.d:e` with the address you want cjdroute to listen on in `ip:port` format and replace `peers a.b.c.d:e` with the `ip:port` address of your peer. Use `login` to specify the login name (which is sometimes `default-login`), and `peername` to identify the peering friendly name (as seen in the peering stats):
 ```
 configure
 set interfaces cjdns tun0 udp-interface 0 bind-address a.b.c.d:e
 set interfaces cjdns tun0 udp-interface 0 peers a.b.c.d:e password xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
 set interfaces cjdns tun0 udp-interface 0 peers a.b.c.d:e publickey xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx.k
+set interfaces cjdns tun0 udp-interface 0 peers a.b.c.d:e login xxxxxxxx
+set interfaces cjdns tun0 udp-interface 0 peers a.b.c.d:e peername xxxxxxxx
 commit
 ```
 To configure beacons to automatically peer with other devices on your network using ethernet (assuming `switch0` is your internal interface):
