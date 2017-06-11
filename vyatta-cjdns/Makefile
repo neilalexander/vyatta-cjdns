@@ -15,6 +15,8 @@ PREFIX='mipsel-linux-gnu-'
 CFLAGS:=$(shell dpkg-buildflags --get CFLAGS)
 LDFLAGS:=$(shell dpkg-buildflags --get LDFLAGS)
 
+BRANCH?='master'
+
 all: clean build package cleanpackage
 
 build: cjdnsclone cjdnsbuild cjdnsstage
@@ -31,7 +33,7 @@ cleanpackage:
 	rm ../data.tar.gz
 
 cjdnsclone:
-	git clone https://github.com/cjdelisle/cjdns $(BUILDDIR_CJD)
+	git clone -b $(BRANCH) https://github.com/cjdelisle/cjdns $(BUILDDIR_CJD)
 	touch /tmp/cjdns/cjdroute
 
 cjdnsbuild:

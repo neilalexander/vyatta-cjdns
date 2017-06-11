@@ -26,9 +26,15 @@ dpkg --add-architecture mipsel
 apt-get update
 apt-get install crossbuild-essential-mipsel
 ```
-Compile the package then by cloning the repository and running 'make':
+Compile the package from the `master` branch by cloning the repository and running 'make':
 ```
+cd vyatta-cjdns
 make
+```
+Alternatively, clone and compile the `crashey` branch:
+```
+cd vyatta-cjdns
+make BRANCH=crashey
 ```
 The package `vyatta-cjdns.deb` will be created in the parent directory. Copy it to the EdgeRouter and install it:
 ```
@@ -76,7 +82,7 @@ configure
 set interfaces cjdns tun0
 commit
 ```
-This automatically populates the IPv6 address, public key, private key and admin socket details, as shown with `show interfaces cjdns tun0` in the configure view. 
+This automatically populates the IPv6 address, public key, private key and admin socket details, as shown with `show interfaces cjdns tun0` in the configure view.
 
 #### Peerings
 
