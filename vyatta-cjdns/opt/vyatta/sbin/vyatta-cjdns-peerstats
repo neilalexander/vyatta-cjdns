@@ -33,6 +33,15 @@ def sizeof_fmt(num):
             return "%3.1f%s" % (num, x)
         num /= 1024.0
 
+def parseAddr(addr):
+    tokens = addr.split('.', 5)
+    res = {
+        'version': tokens[0].strip('v'),
+        'switchLabel': '.'.join(tokens[1:5]),
+        'publicKey': tokens[5]
+    }
+    return res
+
 def peerStats(cjdns,up=False):
     allPeers = []
 
@@ -41,6 +50,7 @@ def peerStats(cjdns,up=False):
         ps = cjdns.InterfaceController_peerStats(i);
         peers = ps['peers']
         for p in peers:
+            p.update(parseAddr(p['addr']))
             if p['state'] == 'UNRESPONSIVE' and up:
                 continue
             allPeers.append(p)
