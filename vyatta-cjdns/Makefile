@@ -10,18 +10,24 @@ SBINDIR=$DESTDIR/sbin/
 
 BUILDDIR_CJD=/tmp/cjdns
 
-PREFIX='mipsel-linux-gnu-'
+PREFIX?='mipsel-linux-gnu-'
+PKGARCH?=$(shell echo $PREFIX | cut -d '-' -f 1 -)
 
 CFLAGS:=$(shell dpkg-buildflags --get CFLAGS)
 LDFLAGS:=$(shell dpkg-buildflags --get LDFLAGS)
 
 BRANCH?='master'
 
-all: clean build package cleanpackage
+all: cross
 
-build: cjdnsclone cjdnsbuild cjdnsstage
+cross: clean build-cross package cleanpackage
+native: clean build-native package cleanpackage
+
+build-cross: cjdnsclone cjdnsbuild-cross cjdnsstage
+build-native: cjdnsclone cjdnsbuild-native cjdnsstage
 
 package:
+	sed -i "s/^Architecture: .*/Architecture: $PKGARCH/" debian/control
 	tar czvf ../data.tar.gz opt
 	cd debian && tar czvf ../../control.tar.gz *
 	echo 2.0 > ../debian-binary
@@ -36,8 +42,11 @@ cjdnsclone:
 	git clone -b $(BRANCH) https://github.com/cjdelisle/cjdns $(BUILDDIR_CJD)
 	touch /tmp/cjdns/cjdroute
 
-cjdnsbuild:
+cjdnsbuild-cross:
 	cd $(BUILDDIR_CJD) && TARGET_ARCH='mips' CROSS_COMPILE=$(PREFIX) CROSS_CFLAGS="-mips32r2" Seccomp_NO=1 ./cross-do
+
+cjdnsbuild-native:
+	cd $(BUILDDIR_CJD) && ./do
 
 cjdnsstage:
 	cp $(BUILDDIR_CJD)/cjdroute opt/vyatta/sbin/cjdroute
