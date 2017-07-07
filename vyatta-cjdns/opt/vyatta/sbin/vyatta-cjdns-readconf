@@ -2,11 +2,25 @@
 
 import json
 import sys
+import os
 
+configfile = '/config/cjdroute.' + sys.argv[1] + '.conf'
 data = {}
 
-with open('/config/cjdroute.' + sys.argv[1] + '.conf') as data_file:
-    data = json.load(data_file)
+try:
+    with open(configfile) as data_file:
+        data = json.load(data_file)
+except:
+    os.system('/opt/vyatta/sbin/cjdroute --cleanconf < ' + configfile + ' > ' + configfile + ".tmp")
+
+    try:
+        with open(configfile + ".tmp") as data_file:
+            data = json.load(data_file)
+    except:
+        print "Unable to parse " + configfile + " - file malformed?"
+        exit -1
+    else:
+        os.system("mv " + configfile + ".tmp " + configfile)
 
 def getAdminAddress():
     print data['admin']['bind']
