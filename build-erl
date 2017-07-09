@@ -14,7 +14,7 @@ then
 fi
 
 echo "Checking if Codescape GNU Tools Package for MIPS is in /opt..."
-if [ -d "/opt/mips-mti-linux-gnu/2015.06-05/" ];
+if [ ! -d "/opt/mips-mti-linux-gnu/2015.06-05/" ];
 then
     echo "Downloading and unpacking Codescape GNU Tools Package for MIPS into /opt"
     wget -P /tmp http://codescape-mips-sdk.imgtec.com/components/toolchain/2015.06-05/Codescape.GNU.Tools.Package.2015.06-05.for.MIPS.MTI.Linux.CentOS-5.x86_64.tar.gz
