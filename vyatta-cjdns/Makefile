@@ -34,7 +34,7 @@ package:
 	cd debian && tar czvf ../../control.tar.gz *
 	echo 2.0 > ../debian-binary
 	ar -r ../$(PACKAGE)-$(VERSION)-$(PKGARCH).deb ../debian-binary ../control.tar.gz ../data.tar.gz
-	ln -s ../$(PACKAGE)-$(VERSION)-$(PKGARCH).deb ../$(PACKAGE).deb
+	cp -f ../$(PACKAGE)-$(VERSION)-$(PKGARCH).deb ../$(PACKAGE).deb
 
 cleanpackage:
 	rm ../debian-binary
