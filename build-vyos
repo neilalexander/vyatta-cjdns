@@ -28,16 +28,15 @@ then
 fi
 
 echo "Checking if sudo is installed..."
-dpkg -s sudo >/dev/null
+dpkg -s sudo >/dev/null 2>1
 if [ $? -eq 1 ];
 then
     echo "Installing sudo"
-    sudo apt-get update
-    sudo apt-get install -y sudo
+    su -c "apt-get update; apt-get install -y sudo"
 fi
 
 echo "Checking if build-essential is installed..."
-dpkg -s build-essential >/dev/null
+dpkg -s build-essential >/dev/null 2>1
 if [ $? -eq 1 ];
 then
     echo "Installing build-essential"
