@@ -1,3 +1,5 @@
 .DS_Store
 cjdroute
-vyatta-cjdns.deb
+*.deb
+debian-binary
+*.tar.gz
