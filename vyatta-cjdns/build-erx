@@ -37,4 +37,4 @@ then
 fi
 
 echo "Building vyatta-cjdns..."
-PREFIX='mipsel-linux-gnu-' PKGARCH='mipsel' make cross -e &&
+PREFIX='mipsel-linux-gnu-' PKGARCH='mipsel' make cross -e
