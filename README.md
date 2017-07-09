@@ -1,18 +1,18 @@
-# cjdns for Ubiquiti EdgeOS
+# cjdns for Ubiquiti EdgeOS / VyOS
 
 ### Introduction
 
-This is a cjdns distributable package for Ubiquiti EdgeOS. It supports configuration through the standard configuration editor and should therefore be very straight-forward to deploy.
+This is a cjdns distributable package for Ubiquiti EdgeOS, VyOS and potentially other Vyatta-based systems. It supports configuration through the standard configuration editor and should therefore be very straight-forward to deploy.
 
 At this time this package is in very early stages of development, but the ultimate aim is to provide binary builds for some commonly-used platforms with pre-built cjdns binaries.
 
 ### Compatibility
 
-|                       | Architecture | Compatible |                      Notes                     |
-|-----------------------|:------------:|:----------:|:----------------------------------------------:|
-|    EdgeRouter X (ERX) |    mipsel    |     Yes    | Builds with crossbuild-essential, see below    |
-| EdgeRouter Lite (ERL) |    mips64    |     Yes    | Builds with Codescape SDK as mips32, see below |
-|         VyOS          |    amd64     |     Yes    | Builds with crossbuild-essential, see below    |
+|                       | Architecture | Compatible |                      Notes                                    |
+|-----------------------|:------------:|:----------:|:-------------------------------------------------------------:|
+|    EdgeRouter X (ERX) |    mipsel    |     Yes    | Builds with crossbuild-essential, see below                   |
+| EdgeRouter Lite (ERL) |    mips64    |     Yes    | Builds with Codescape SDK as mips32, see below                |
+|       VyOS 1.1.x      | i386, amd64  |     Yes    | Builds with crossbuild-essential on Squeeze only, see below   |
 
 ### Building for EdgeRouter X
 
@@ -73,7 +73,7 @@ sudo dpkg -i vyatta-cjdns.deb
 
 At present VyOS 1.1.x are based on Debian Squeeze. To match the glibc version it is best to also use Debian Squeeze to target it. Future versions of VyOS (1.2.x) will be based on Debian Jessie.
 
-Generally it is easiest to target the VyOS architecture you are using (`i386`, `amd64`) by using the same architecture in your build environment. However, you may be able to target `i386` from an `amd64` system by specifying `CFLAGS="-m32"` to `make native`.
+Generally it is easiest to target the VyOS architecture you are using (`i386`, `amd64`) by using the same architecture in your build environment. However, you may be able to target `i386` from an `amd64` system by specifying some `CFLAGS` and `PKGARCH="i386"` to `make native`, but that process is not documented here.
 
 On Debian Squeeze, start by installing the toolchain and dependencies:
 ```
@@ -119,7 +119,7 @@ configure
 set interfaces cjdns tun0
 commit
 ```
-This automatically populates the IPv6 address, public key, private key and admin socket details, as shown with `show interfaces cjdns tun0` in the configure view.
+This automatically generates a new private key and then populates the IPv6 address, public key, private key and admin socket details into the config, as shown with `show interfaces cjdns tun0` in the configure view.
 
 #### Peerings
 
@@ -150,7 +150,9 @@ commit
 
 #### Identity
 
-An IPv6 address and a keypair are automatically generated when you create a new cjdns interface. The `publickey`, `privatekey` and `ipv6` fields will be automatically populated with these. To manually configure your own IPv6 address and keypair (i.e. to bring in an existing keypair from another machine):
+An IPv6 address and a keypair are automatically generated when you create a new cjdns interface. The `publickey`, `privatekey` and `ipv6` fields will be automatically populated with these.
+
+To override the automatically generated keypair and manually configure your own IPv6 address and keypair (i.e. to bring in an existing keypair from another machine):
 ```
 configure
 set interfaces cjdns tun0 publickey xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx.k
