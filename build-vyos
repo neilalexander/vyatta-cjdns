@@ -14,7 +14,7 @@ then
 fi
 
 echo "Checking if python2.7 is installed..."
-if [ `which -a python2.7" | wc -l` -lt 1 ];
+if [ `which -a python2.7 | wc -l` -lt 1 ];
 then
     echo "Downloading and building python2.7"
     wget -P /tmp https://www.python.org/ftp/python/2.7/Python-2.7.tgz
