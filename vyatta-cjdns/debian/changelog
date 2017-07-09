@@ -1,5 +1,5 @@
-vyatta-cjdns (0.1) UNRELEASED; urgency=medium
+vyatta-cjdns (0.1.0) UNRELEASED; urgency=medium
 
-  * v0.1-1
+  * v0.1.0
 
  -- Neil Alexander <neilalexander@users.noreply.github.com>  Sun, 20 Dec 2015 21:08:22 +0000

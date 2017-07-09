@@ -1,5 +1,5 @@
 Package: vyatta-cjdns
-Version: 0.1-1
+Version: 0.1.0
 Section: contrib/net
 Priority: extra
 Architecture: mipsel
@@ -7,5 +7,5 @@ Maintainer: Neil Alexander <neilalexander@noreply.users.github.com>
 Depends: vyatta-cfg-system, vyatta-cfg, vyatta-op
 Replaces: vyatta-cjdns
 Description: Vyatta cjdns package
- Binary cjdns package for MIPS-based Vyatta platforms
- such as the Ubiquiti EdgeRouter X
+ Binary cjdns package for Vyatta platforms such as
+ the Ubiquiti EdgeRouter X and EdgeRouter Lite
