@@ -12,6 +12,7 @@ At this time this package is in very early stages of development, but the ultima
 |-----------------------|:------------:|:----------:|:----------------------------------------------:|
 |    EdgeRouter X (ERX) |    mipsel    |     Yes    | Builds with crossbuild-essential, see below    |
 | EdgeRouter Lite (ERL) |    mips64    |     Yes    | Builds with Codescape SDK as mips32, see below |
+|         VyOS          |    amd64     |     Yes    | Builds with crossbuild-essential, see below    |
 
 ### Building for EdgeRouter X
 
@@ -24,7 +25,7 @@ apt-key add emdebian-toolchain-archive.key
 
 dpkg --add-architecture mipsel
 apt-get update
-apt-get install crossbuild-essential-mipsel
+apt-get install -y crossbuild-essential-mipsel
 ```
 Compile the package from the `master` branch by cloning the repository and running 'make':
 ```
@@ -45,8 +46,8 @@ sudo dpkg -i vyatta-cjdns.deb
 
 On 64-bit Debian Jessie, start by installing the build-essential package:
 ```
-sudo apt-get update
-sudo apt-get install -y build-essential
+apt-get update
+apt-get install -y build-essential
 ```
 So far the only proven working toolchain is the Codescape SDK 2015.01.7 (and 2015.06.05).
 
@@ -64,6 +65,42 @@ Clone the repository, edit the file `vyatta-cjdns/debian/control` and change `Ar
 PREFIX='mips-mti-linux-gnu-' make -e
 ```
 The package `vyatta-cjdns.deb` will be created in the parent directory. Copy it to the EdgeRouter and install it:
+```
+sudo dpkg -i vyatta-cjdns.deb
+```
+
+### Building for VyOS 1.1.7
+
+At present VyOS 1.1.x are based on Debian Squeeze. To match the glibc version it is best to also use Debian Squeeze to target it. Future versions of VyOS (1.2.x) will be based on Debian Jessie.
+
+Generally it is easiest to target the VyOS architecture you are using (`i386`, `amd64`) by using the same architecture in your build environment. However, you may be able to target `i386` from an `amd64` system by specifying `CFLAGS="-m32"` to `make native`.
+
+On Debian Squeeze, start by installing the toolchain and dependencies:
+```
+echo "deb http://archive.debian.org/debian/ squeeze main non-free" >> /etc/apt/sources.list
+apt-get update
+apt-get install -y build-essential git
+```
+Build and install `python2.7`, as the `python2.6` bundled with Squeeze is not adequate:
+```
+wget https://www.python.org/ftp/python/2.7/Python-2.7.tgz
+tar zxf Python-2.7.tgz
+cd Python-2.7/
+./configure
+make
+make install
+```
+Compile the package from the `master` branch by cloning the repository and running 'make native':
+```
+cd vyatta-cjdns
+make native
+```
+Alternatively, clone and compile the `crashey` branch:
+```
+cd vyatta-cjdns
+make native BRANCH=crashey
+```
+The package `vyatta-cjdns.deb` will be created in the parent directory. Copy it to the VyOS router and install it:
 ```
 sudo dpkg -i vyatta-cjdns.deb
 ```

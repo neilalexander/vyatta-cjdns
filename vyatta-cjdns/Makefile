@@ -11,7 +11,7 @@ SBINDIR=$DESTDIR/sbin/
 BUILDDIR_CJD=/tmp/cjdns
 
 PREFIX?='mipsel-linux-gnu-'
-PKGARCH?=$(shell echo $PREFIX | cut -d '-' -f 1 -)
+PKGARCH?=$(shell dpkg --print-architecture)
 
 CFLAGS:=$(shell dpkg-buildflags --get CFLAGS)
 LDFLAGS:=$(shell dpkg-buildflags --get LDFLAGS)
@@ -27,7 +27,7 @@ build-cross: cjdnsclone cjdnsbuild-cross cjdnsstage
 build-native: cjdnsclone cjdnsbuild-native cjdnsstage
 
 package:
-	sed -i "s/^Architecture: .*/Architecture: $(PKGARCH)/" debian/control
+	sed -i "s/^Architecture: .*/Architecture: $PKGARCH/" debian/control
 	tar czvf ../data.tar.gz opt
 	cd debian && tar czvf ../../control.tar.gz *
 	echo 2.0 > ../debian-binary
