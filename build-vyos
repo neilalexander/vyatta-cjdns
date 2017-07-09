@@ -6,6 +6,14 @@ then
     exit -1
 fi
 
+echo "Checking if sudo is installed..."
+dpkg -s sudo >/dev/null 2>1
+if [ $? -eq 1 ];
+then
+    echo "Installing sudo"
+    su -c "apt-get update; apt-get install -y sudo"
+fi
+
 echo "Checking if squeeze archive repository is a configured apt source..."
 if [ `cat /etc/apt/sources.list | grep "http://archive.debian.org/debian/ squeeze" | wc -l` -ne 1 ];
 then
@@ -25,14 +33,6 @@ then
     make
     sudo make install
     cd $PWD
-fi
-
-echo "Checking if sudo is installed..."
-dpkg -s sudo >/dev/null 2>1
-if [ $? -eq 1 ];
-then
-    echo "Installing sudo"
-    su -c "apt-get update; apt-get install -y sudo"
 fi
 
 echo "Checking if build-essential is installed..."
