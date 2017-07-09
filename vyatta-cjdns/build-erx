@@ -1,0 +1,40 @@
+#!/bin/sh
+
+if [ `cat /etc/de*_version | grep "jessie" | wc -l` -ne 1 ];
+then
+    echo "This script is supported on jessie only"
+    exit -1
+fi
+
+echo "Checking if emdebian repository is a configured apt source..."
+if [ `cat /etc/apt/sources.list | grep "http://emdebian.org/tools/debian/ jessie" | wc -l` -ne 1 ];
+then
+    echo "Adding emdebian.org repository to apt sources"
+    sudo echo "deb http://emdebian.org/tools/debian/ jessie main" >> /etc/apt/sources.list
+fi
+
+echo "Checking if emdebian repository GPG key is trusted..."
+if [ `apt-key list | grep Emdebian | wc -l` -lt 1 ];
+then
+    echo "Key not trusted, installing"
+    wget -qO - http://emdebian.org/tools/debian/emdebian-toolchain-archive.key | sudo apt-key add -
+fi
+
+echo "Checking if 'mipsel' is configured dpkg foreign architecture...."
+if [ `dpkg --print-foreign-architectures | grep "mipsel" | wc -l` -lt 1 ];
+then
+    echo "Adding mipsel to dpkg architectures"
+    sudo dpkg --add-architecture mipsel
+fi
+
+echo "Checking if crossbuild-essential-mipsel is installed..."
+dpkg -s crossbuild-essential-mipsel >/dev/null
+if [ $? -eq 1 ];
+then
+    echo "Installing crossbuild-essential-mipsel"
+    sudo apt-get update
+    sudo apt-get install -y crossbuild-essential-mipsel
+fi
+
+echo "Building vyatta-cjdns..."
+PREFIX='mipsel-linux-gnu-' PKGARCH='mipsel' make cross -e
