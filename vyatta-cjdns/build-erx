@@ -1,0 +1,33 @@
+#!/bin/sh
+
+if [ `cat /etc/de*_version` -ne "jessie" ];
+then
+    echo "This script is supported on jessie only"
+    exit -1
+fi
+
+if [ `cat /etc/apt/sources.list | grep "http://emdebian.org/tools/debian/ jessie" | wc -l` -ne 1 ];
+then
+    sudo echo "deb http://emdebian.org/tools/debian/ jessie main" >> /etc/apt/sources.list
+fi
+
+if [ `apt-key list | grep Emdebian | wc -l` -lt 1 ];
+then
+    wget -qO - http://emdebian.org/tools/debian/emdebian-toolchain-archive.key | sudo apt-key add -
+fi
+
+if [ `dpkg --print-foreign-architectures | grep "mipsel" | wc -l` -lt 1 ];
+then
+    sudo dpkg --add-architecture mipsel
+fi
+
+dpkg -s crossbuild-essential-mipsel >/dev/null
+if [ $? -eq 1 ];
+then
+    sudo apt-get update
+    sudo apt-get install -y crossbuild-essential-mipsel
+fi
+
+cd vyatta-cjdns && \
+    PREFIX='mipsel-linux-gnu-' PKGARCH='mipsel' make cross -e &&
+    cd ..
