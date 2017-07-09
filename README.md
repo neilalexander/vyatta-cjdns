@@ -30,12 +30,12 @@ apt-get install -y crossbuild-essential-mipsel
 Compile the package from the `master` branch by cloning the repository and running 'make':
 ```
 cd vyatta-cjdns
-make
+PREFIX='mipsel-linux-gnu-' PKGARCH='mipsel' make -e
 ```
 Alternatively, clone and compile the `crashey` branch:
 ```
 cd vyatta-cjdns
-make BRANCH=crashey
+PREFIX='mipsel-linux-gnu-' PKGARCH='mipsel' BRANCH=crashey make -e
 ```
 The package `vyatta-cjdns.deb` will be created in the parent directory. Copy it to the EdgeRouter and install it:
 ```
@@ -63,6 +63,11 @@ PATH=$HOME/mips-mti-linux-gnu/2015.06-05/bin:$PATH
 Clone the repository and then initiate the build by running:
 ```
 PREFIX='mips-mti-linux-gnu-' PKGARCH='mips' make -e
+```
+Alternatively, clone and compile the `crashey` branch:
+```
+cd vyatta-cjdns
+PREFIX='mips-mti-linux-gnu-' PKGARCH='mips' BRANCH=crashey make -e
 ```
 The package `vyatta-cjdns.deb` will be created in the parent directory. Copy it to the EdgeRouter and install it:
 ```

@@ -12,6 +12,7 @@ BUILDDIR_CJD=/tmp/cjdns
 
 PREFIX?='mipsel-linux-gnu-'
 PKGARCH?=$(shell dpkg --print-architecture)
+VERSION=$(shell printf "0.1.%s" `git rev-list --count HEAD`)
 
 CFLAGS:=$(shell dpkg-buildflags --get CFLAGS)
 LDFLAGS:=$(shell dpkg-buildflags --get LDFLAGS)
@@ -28,10 +29,12 @@ build-native: cjdnsclone cjdnsbuild-native cjdnsstage
 
 package:
 	sed -i "s/^Architecture: .*/Architecture: $(PKGARCH)/" debian/control
+	sed -i "s/^Version: .*/Version: $(VERSION)/" debian/control
 	tar czvf ../data.tar.gz opt
 	cd debian && tar czvf ../../control.tar.gz *
 	echo 2.0 > ../debian-binary
-	ar -r ../$(PACKAGE).deb ../debian-binary ../control.tar.gz ../data.tar.gz
+	ar -r ../$(PACKAGE)-$(VERSION)-$(PKGARCH).deb ../debian-binary ../control.tar.gz ../data.tar.gz
+	ln -s ../$(PACKAGE)-$(VERSION)-$(PKGARCH).deb ../$(PACKAGE).deb
 
 cleanpackage:
 	rm ../debian-binary
