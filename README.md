@@ -60,9 +60,9 @@ Add the bin dir to your `PATH` variable:
 ```
 PATH=$HOME/mips-mti-linux-gnu/2015.06-05/bin:$PATH
 ```
-Clone the repository, edit the file `vyatta-cjdns/debian/control` and change `Architecture: mipsel` to `Architecture: mips`, and then initiate the build by running:
+Clone the repository and then initiate the build by running:
 ```
-PREFIX='mips-mti-linux-gnu-' make -e
+PREFIX='mips-mti-linux-gnu-' PKGARCH='mips' make -e
 ```
 The package `vyatta-cjdns.deb` will be created in the parent directory. Copy it to the EdgeRouter and install it:
 ```
