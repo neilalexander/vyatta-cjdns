@@ -7,7 +7,7 @@ then
 fi
 
 echo "Checking if emdebian repository is a configured apt source..."
-if [ `cat /etc/apt/sources.list | grep "http://emdebian.org/tools/debian/ jessie" | wc -l` -ne 1 ];
+if [ `cat /etc/apt/sources.list | grep "http://emdebian.org/tools/debian/ jessie" | wc -l` -lt 1 ];
 then
     echo "Adding emdebian.org repository to apt sources"
     sudo echo "deb http://emdebian.org/tools/debian/ jessie main" >> /etc/apt/sources.list
