@@ -12,7 +12,7 @@ BUILDDIR_CJD=/tmp/cjdns
 
 PREFIX?='mipsel-linux-gnu-'
 PKGARCH?=$(shell dpkg --print-architecture)
-VERSION=$(shell printf "0.1.%s" `git rev-list --count HEAD`)
+VERSION=$(shell printf "0.1.%s" `git rev-list --count HEAD 2>/dev/null || echo 0`)
 
 CFLAGS:=$(shell dpkg-buildflags --get CFLAGS)
 LDFLAGS:=$(shell dpkg-buildflags --get LDFLAGS)
