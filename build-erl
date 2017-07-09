@@ -1,0 +1,29 @@
+#!/bin/sh
+
+if [ `cat /etc/de*_version | grep "jessie" | wc -l` -ne 1 ];
+then
+    echo "This script is supported on jessie only"
+    exit -1
+fi
+
+echo "Checking if emdebian repository is a configured apt source..."
+if [ `cat /etc/apt/sources.list | grep "http://emdebian.org/tools/debian/ jessie" | wc -l` -ne 1 ];
+then
+    echo "Adding emdebian.org repository to apt sources"
+    sudo echo "deb http://emdebian.org/tools/debian/ jessie main" >> /etc/apt/sources.list
+fi
+
+echo "Checking if Codescape GNU Tools Package for MIPS is in /opt..."
+if [ -d "/opt/mips-mti-linux-gnu/2015.06-05/" ];
+then
+    echo "Downloading and unpacking Codescape GNU Tools Package for MIPS into /opt"
+    wget -P /tmp http://codescape-mips-sdk.imgtec.com/components/toolchain/2015.06-05/Codescape.GNU.Tools.Package.2015.06-05.for.MIPS.MTI.Linux.CentOS-5.x86_64.tar.gz
+    sudo tar -zxf /tmp/Codescape.GNU.Tools.Package.2015.06-05.for.MIPS.MTI.Linux.CentOS-5.x86_64.tar.gz -C /opt
+fi
+
+PATH=/opt/mips-mti-linux-gnu/2015.06-05/bin:$PATH
+
+echo "Building vyatta-cjdns..."
+cd vyatta-cjdns && \
+    PREFIX='mips-mti-linux-gnu-' PKGARCH='mips' make cross -e && \
+    cd ..
