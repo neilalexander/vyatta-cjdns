@@ -30,12 +30,15 @@ SBINDIR=$DESTDIR/sbin/
 BUILDDIR_CJD=/tmp/cjdns
 
 PREFIX?='mipsel-linux-gnu-'
+CROSS_CFLAGS?='-mips32r2'
+CROSS_LDFLAGS?=''
+
 PKGARCH?=$(shell dpkg --print-architecture)
 BUILDNUMBER=$(shell git rev-list v$(RELEASE)..HEAD --count 2>/dev/null || echo 0)
 ifeq ($(BUILDNUMBER),0)
 VERSION=$(RELEASE)
 else
-VERSION=$(RELEASE).$(shell echo $(BUILDNUMBER)+1 | bc)
+VERSION=$(RELEASE).$(shell echo $(BUILDNUMBER) | bc)
 endif
 
 CFLAGS:=$(shell dpkg-buildflags --get CFLAGS)
@@ -69,7 +72,10 @@ cjdnsclone:
 	touch /tmp/cjdns/cjdroute
 
 cjdnsbuild-cross:
-	cd $(BUILDDIR_CJD) && TARGET_ARCH='mips' CROSS_COMPILE=$(PREFIX) CROSS_CFLAGS="-mips32r2" Seccomp_NO=1 ./cross-do
+	cd $(BUILDDIR_CJD) && \
+		TARGET_ARCH='mips' CROSS_COMPILE='$(PREFIX)' \
+		CROSS_CFLAGS='$(CROSS_CFLAGS)' CROSS_LDFLAGS='$(CROSS_LDFLAGS)' \
+		Seccomp_NO=1 ./cross-do
 
 cjdnsbuild-native:
 	cd $(BUILDDIR_CJD) && ./do

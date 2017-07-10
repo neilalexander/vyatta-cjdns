@@ -1,5 +1,5 @@
 Package: vyatta-cjdns
-Version: 0.1.0
+Version: 0.2
 Section: contrib/net
 Priority: extra
 Architecture: mipsel
