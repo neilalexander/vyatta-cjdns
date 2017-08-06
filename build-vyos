@@ -18,7 +18,7 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 
-if [ `lsb_release -c | grep "squeeze" | wc -l` -ne 1 ];
+if [ `dpkg --status tzdata | grep Provides | cut -f 2 -d '-' | grep squeeze | wc -l` -ne 1 ];
 then
     echo "This script is supported on squeeze only"
     exit -1
