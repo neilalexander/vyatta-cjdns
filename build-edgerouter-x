@@ -18,7 +18,7 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 
-if [ `cat /etc/de*_version | grep "jessie" | wc -l` -ne 1 ];
+if [ `lsb_release -c | grep "jessie" | wc -l` -ne 1 ];
 then
     echo "This script is supported on jessie only"
     exit -1

@@ -14,7 +14,16 @@ At this time this package is in very early stages of development, but the ultima
 | EdgeRouter Lite (ERL) |    mips64    |     Yes    | Builds with Codescape SDK as mips32, see below                |
 |       VyOS 1.1.x      | i386, amd64  |     Yes    | Builds with crossbuild-essential on Squeeze only, see below   |
 
-### Building for EdgeRouter X
+### Building for Supported Platforms
+
+Use the provided shell scripts, which will do most of the hard work for you:
+```
+./build-edgerouter-x
+./build-edgerouter-lite
+./build-vyos
+```
+
+### Manually Building for EdgeRouter X
 
 On 64-bit Debian Jessie, start by installing the toolchain:
 ```
@@ -42,7 +51,7 @@ The package `vyatta-cjdns.deb` will be created in the parent directory. Copy it 
 sudo dpkg -i vyatta-cjdns.deb
 ```
 
-### Building for EdgeRouter Lite
+### Manually Building for EdgeRouter Lite
 
 On 64-bit Debian Jessie, start by installing the build-essential package:
 ```
@@ -74,7 +83,7 @@ The package `vyatta-cjdns.deb` will be created in the parent directory. Copy it 
 sudo dpkg -i vyatta-cjdns.deb
 ```
 
-### Building for VyOS 1.1.7
+### Manually Building for VyOS 1.1.7
 
 At present VyOS 1.1.x are based on Debian Squeeze. To match the glibc version it is best to also use Debian Squeeze to target it. Future versions of VyOS (1.2.x) will be based on Debian Jessie.
 
@@ -122,6 +131,7 @@ Start by creating the default configuration on the interface:
 ```
 configure
 set interfaces cjdns tun0
+set interfaces cjdns tun0 description CJDNS
 commit
 ```
 This automatically generates a new private key and then populates the IPv6 address, public key, private key and admin socket details into the config, as shown with `show interfaces cjdns tun0` in the configure view.
