@@ -52,7 +52,7 @@ package:
 	cd debian && tar czvf ../../control.tar.gz *
 	echo 2.0 > ../debian-binary
 	ar -r ../$(PACKAGE)-$(VERSION)-$(PKGARCH).deb ../debian-binary ../control.tar.gz ../data.tar.gz
-	cp -f ../$(PACKAGE)-$(VERSION)-$(PKGARCH).deb ../$(PACKAGE).deb
+	ln -fs ../$(PACKAGE)-$(VERSION)-$(PKGARCH).deb ../$(PACKAGE).deb
 
 cleanpackage:
 	rm ../debian-binary
