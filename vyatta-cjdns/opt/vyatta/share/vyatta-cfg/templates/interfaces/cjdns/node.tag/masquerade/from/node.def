@@ -5,4 +5,5 @@ help: Source IPv6 subnet from which to masquerade
 create: sudo ip6tables -t nat -A POSTROUTING -o $VAR(../../@) -s $VAR(@) -j MASQUERADE
 delete: sudo ip6tables -t nat -D POSTROUTING -o $VAR(../../@) -s $VAR(@) -j MASQUERADE
 
-commit:expression: exec "sudo ip6tables -t nat -L &>/dev/null"; "IPv6 masquerade is not supported on this platform"
+syntax:expression: exec "sudo ip6tables -t nat -A POSTROUTING -o lo -j MASQUERADE &>/dev/null; sudo ip6tables -t nat -D POSTROUTING -o lo -j MASQUERADE &>/dev/null"; "IPv6 masquerade is not supported on this platform"
+commit:expression: exec "sudo ip6tables -t nat -A POSTROUTING -o lo -j MASQUERADE &>/dev/null; sudo ip6tables -t nat -D POSTROUTING -o lo -j MASQUERADE &>/dev/null"; "IPv6 masquerade is not supported on this platform"
