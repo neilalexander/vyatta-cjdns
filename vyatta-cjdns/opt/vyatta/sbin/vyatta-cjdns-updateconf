@@ -33,6 +33,7 @@ def setStandardConfiguration(interface):
     data['interfaces']['ETHInterface'] = []
     data['authorizedPasswords'] = []
     data['router']['interface']['tunDevice'] = interface
+    data['admin']['bind'] = "127.0.0.1:" + str(11123 + int(interface[3:]))
 
 def addAuthorizedPassword(user, password):
     deleteAuthorizedPassword(user)
