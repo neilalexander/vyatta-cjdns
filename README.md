@@ -193,13 +193,15 @@ set interfaces cjdns tun0 firewall local ipv6-name CJD_LOCAL
 
 If you want to allow other IPv6 hosts on your network to communicate through cjdns, you can configure an IPv6 masquerade rule. All traffic sent from other hosts on the network through the cjdns interface will be NAT'd.
 
-For example, where your IPv6 network subnet is `fd94:b2f3:9442::/48`:
+For example:
 ```
 configure
-set interfaces cjdns tun0 masquerade from fd94:b2f3:9442::/48
+set interfaces cjdns tun0 masquerade from xxxx:xxxx:xxxx::/48
 commit
 ```
 If you have multiple IPv6 subnets, then they can be configured individually by setting multiple `masquerade from` source ranges. Both private/ULA and public IPv6 subnets are acceptable.
+
+IPv6 masquerade is not supported on VyOS 1.1.x due to missing support in the kernel.
 
 #### IP Tunnel
 
