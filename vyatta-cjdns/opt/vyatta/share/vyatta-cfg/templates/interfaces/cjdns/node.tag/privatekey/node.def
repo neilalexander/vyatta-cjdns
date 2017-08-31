@@ -7,3 +7,5 @@ priority: 999
 create: /opt/vyatta/sbin/vyatta-cjdns-updateconf $VAR(../@) updatePrivateKey $VAR(@)
 update: /opt/vyatta/sbin/vyatta-cjdns-updateconf $VAR(../@) updatePrivateKey $VAR(@)
 update: /opt/vyatta/sbin/vyatta-cjdns-updateconf $VAR(../@) updateIPv6Address $VAR(@)
+
+syntax:expression: pattern $VAR(@) "^[0-9a-fA-F]{64}$"; "Private key must be 64 hexadecimal characters"

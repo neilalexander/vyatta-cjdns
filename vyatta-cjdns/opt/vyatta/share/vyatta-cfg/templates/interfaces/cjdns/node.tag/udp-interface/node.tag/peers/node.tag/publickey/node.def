@@ -5,3 +5,5 @@ val_help: txt; Public key
 create: /opt/vyatta/sbin/vyatta-cjdns-updateconf $VAR(../../../@) updateUDPConnectToPublicKey $VAR(../../@) $VAR(../@) $VAR(@)
 update: /opt/vyatta/sbin/vyatta-cjdns-updateconf $VAR(../../../@) updateUDPConnectToPublicKey $VAR(../../@) $VAR(../@) $VAR(@)
 delete: /opt/vyatta/sbin/vyatta-cjdns-updateconf $VAR(../../../@) updateUDPConnectToPublicKey $VAR(../../@) $VAR(../@) $VAR(@)
+
+syntax:expression: pattern $VAR(@) "^[0-9a-zA-Z]{52}\.k$"; "Public key must be 52 characters followed by .k"

@@ -1,6 +1,8 @@
 tag:
 type: txt
 help: Public key of cjdns peer to configure IP tunneling with
-val_help: txt; Public key (ending in .k)
+val_help: txt; Public key of peer (ending in .k)
 
 priority: 999
+
+syntax:expression: pattern $VAR(@) "^[0-9a-zA-Z]{52}\.k$"; "Public key must be 52 characters followed by .k"

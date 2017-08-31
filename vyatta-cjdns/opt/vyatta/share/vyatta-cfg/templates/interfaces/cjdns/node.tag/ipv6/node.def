@@ -7,3 +7,5 @@ priority: 999
 create: /opt/vyatta/sbin/vyatta-cjdns-updateconf $VAR(../@) updateIPv6Address $VAR(@)
 update: /opt/vyatta/sbin/vyatta-cjdns-updateconf $VAR(../@) updateIPv6Address $VAR(@)
 update: /opt/vyatta/sbin/vyatta-cjdns-updateconf $VAR(../@) updateIPv6Address $VAR(@)
+
+syntax:expression: pattern $VAR(@) "^fc"; "IPv6 address must fall within fc00::/8"
