@@ -122,9 +122,9 @@ def updateEthernetBindTo(interface, endpoint):
 def updateEthernetBeacon(interface, beaconmode):
     if beaconmode == "none":
         data['interfaces']['ETHInterface'][int(interface)]['beacon'] = 0
-    if beaconmode == "accept":
+    elif beaconmode == "listen":
         data['interfaces']['ETHInterface'][int(interface)]['beacon'] = 1
-    elif beaconmode == "accept-send":
+    elif beaconmode == "listen-send":
         data['interfaces']['ETHInterface'][int(interface)]['beacon'] = 2
     else:
         data['interfaces']['ETHInterface'][int(interface)]['beacon'] = int(beaconmode)

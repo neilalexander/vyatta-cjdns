@@ -3,7 +3,7 @@ help: Beacon mode
 val_help: u32; Beacon mode (0 is none, 1 is listen, 2 is listen-send)
 val_help: txt; Beacon mode ("none", "listen" or "listen-send")
 allowed: echo "none listen listen-send"
-default: 0
+default: "none"
 
 create: /opt/vyatta/sbin/vyatta-cjdns-updateconf $VAR(../../@) updateEthernetBeacon $VAR(../@) $VAR(@)
 update: /opt/vyatta/sbin/vyatta-cjdns-updateconf $VAR(../../@) updateEthernetBeacon $VAR(../@) $VAR(@)
