@@ -217,7 +217,7 @@ def updateTunDevice(device):
     data['router']['interface']['tunDevice'] = device
 
 def addSupernode(publickey):
-    deleteAuthorizedPassword(user)
+    deleteSupernode(publickey)
     data['router']['supernodes'].append(publickey)
 
 def deleteSupernode(publickey):
