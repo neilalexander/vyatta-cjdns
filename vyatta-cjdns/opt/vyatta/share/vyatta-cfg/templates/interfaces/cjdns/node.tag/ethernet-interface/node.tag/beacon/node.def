@@ -1,5 +1,6 @@
 type: txt
-help: Beacon mode
+help: Send ethernet auto-peering beacons on this interface
+comp_help: Ethernet auto-peering beacons can be sent on specified network interfaces so that you peer automatically with other cjdns hosts on the same network. For this to work, both sides should be configured to listen-send, or one should be configured to listen-send and the other to listen. Auto-peering will take place regardless of whether or not the hosts have an IPv4 or IPv6 address on that network interface. 
 val_help: u32; Beacon mode (0 is none, 1 is listen, 2 is listen-send)
 val_help: txt; Beacon mode ("none", "listen" or "listen-send")
 allowed: echo "none listen listen-send"

@@ -1,5 +1,6 @@
 type: txt
 help: Physical interface name to bind to (i.e. eth0)
+comp_help: The interface to bind to, for use with ethernet auto-peering beacons. This is typically a physical network interface on your system, i.e. eth0 or switch0, where other cjdns-listening routers are also connected. 
 val_help: txt; Physical interface name
 allowed: ls /sys/class/net
 

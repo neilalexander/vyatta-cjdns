@@ -1,7 +1,8 @@
 tag:
 type: txt
 help: Public key of cjdns peer to configure IP tunneling with
-val_help: txt; Public key of peer (ending in .k)
+comp_help: IP Tunnel allows standard IPv4 and IPv6 traffic to be tunneled to select cjdns peers, as if using a standard VPN.
+val_help: txt; Your peer's public key (52 characters, followed by .k)
 
 priority: 999
 

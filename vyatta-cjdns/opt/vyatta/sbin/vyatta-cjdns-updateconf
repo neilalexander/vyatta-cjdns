@@ -216,6 +216,14 @@ def updateTunDevice(device):
     data['router']['interface']['type'] = "TUNInterface"
     data['router']['interface']['tunDevice'] = device
 
+def addSupernode(publickey):
+    deleteAuthorizedPassword(user)
+    data['router']['supernodes'].append(publickey)
+
+def deleteSupernode(publickey):
+    if publickey in data['router']['supernodes']:
+        data['router']['supernodes'].remove(publickey)
+
 try:
     if sys.argv[2] == "setStandardConfiguration": setStandardConfiguration(sys.argv[1])
     if sys.argv[2] == "addAuthorizedPassword": addAuthorizedPassword(sys.argv[3], sys.argv[4])
@@ -246,6 +254,8 @@ try:
     if sys.argv[2] == "updatePrivateKey": updatePrivateKey(sys.argv[3])
     if sys.argv[2] == "updateIPv6Address": updateIPv6Address(sys.argv[3])
     if sys.argv[2] == "updateTunDevice": updateTunDevice(sys.argv[3])
+    if sys.argv[2] == "addSupernode": addSupernode(sys.argv[3])
+    if sys.argv[2] == "deleteSupernode": deleteSupernode(sys.argv[3])
 except IndexError:
     print "Incorrect number of parameters supplied"
 finally:

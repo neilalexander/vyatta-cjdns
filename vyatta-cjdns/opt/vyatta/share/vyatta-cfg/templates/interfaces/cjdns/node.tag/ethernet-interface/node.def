@@ -2,6 +2,7 @@ tag:
 type: u32
 help: Ethernet interface number (must start at ZERO)
 val_help: u32; Ethernet interface number
+comp_help: More than one Ethernet interface can be created.
 
 create: /opt/vyatta/sbin/vyatta-cjdns-updateconf $VAR(../@) addEthernetInterface $VAR(@)
 update: /opt/vyatta/sbin/vyatta-cjdns-updateconf $VAR(../@) addEthernetInterface $VAR(@)

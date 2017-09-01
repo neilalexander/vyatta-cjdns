@@ -1,6 +1,7 @@
 type: txt
 help: Bind address, in x.x.x.x:x or [x:x:x:x::x]:x format
 val_help: txt; Bind address
+comp_help: The IPv4 and IPv6 address and port which the UDP interface should use for cjdns peerings over IP. You should allow traffic incoming to this UDP port through your firewall. An IPv4 UDP interface can be used to connect to IPv4 cjdns peers, and an IPv6 UDP interface can be used to connect to IPv6 cjdns peers. More than one UDP interface can be created.
 
 create: /opt/vyatta/sbin/vyatta-cjdns-updateconf $VAR(../../@) updateUDPBindTo $VAR(../@) $VAR(@)
 update: /opt/vyatta/sbin/vyatta-cjdns-updateconf $VAR(../../@) updateUDPBindTo $VAR(../@) $VAR(@)

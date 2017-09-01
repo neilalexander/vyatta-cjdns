@@ -1,6 +1,7 @@
 type: txt
-help: cjdns public key
-val_help: txt; Public key
+help: Your cjdns public key (share this with your peers)
+comp_help: Your cjdns public key, which is used by your peers to encrypt traffic for you. Your private key, public key and cjdns IPv6 address are cryptographically linked. This is safe to share with others - you must send this to your peers.
+val_help: txt; Public key (52 characters, followed by .k)
 
 priority: 999
 

@@ -1,5 +1,6 @@
 type: txt
-help: Password
+help: Admin Password
+comp_help: The password required to connect to the cjdns admin port. You should set this to something secure if you allow access to the cjdns admin port externally, i.e. by changing the admin-bind-address.
 val_help: txt; Password
 
 priority: 999

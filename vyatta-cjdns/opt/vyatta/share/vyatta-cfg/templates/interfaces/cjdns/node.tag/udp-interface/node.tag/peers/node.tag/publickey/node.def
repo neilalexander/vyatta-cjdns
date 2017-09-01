@@ -1,6 +1,7 @@
 type: txt
-help: Public key
-val_help: txt; Public key
+help: Public key of your peer
+val_help: txt; Public key (52 characters, followed by .k)
+comp_help: The public key of your peer.
 
 create: /opt/vyatta/sbin/vyatta-cjdns-updateconf $VAR(../../../@) updateUDPConnectToPublicKey $VAR(../../@) $VAR(../@) $VAR(@)
 update: /opt/vyatta/sbin/vyatta-cjdns-updateconf $VAR(../../../@) updateUDPConnectToPublicKey $VAR(../../@) $VAR(../@) $VAR(@)

@@ -1,5 +1,6 @@
 type: txt
 help: Password
+comp_help: The password that cjdns will use to establish a connection with your peer.
 val_help: txt; Password
 
 create: /opt/vyatta/sbin/vyatta-cjdns-updateconf $VAR(../../../@) updateUDPConnectToPassword $VAR(../../@) $VAR(../@) $VAR(@)

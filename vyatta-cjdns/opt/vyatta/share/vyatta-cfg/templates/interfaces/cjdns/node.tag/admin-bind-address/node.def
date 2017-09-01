@@ -1,5 +1,6 @@
 type: txt
-help: Bind address, in x.x.x.x:x or [x:x:x:x::x]:x format
+help: Admin Bind address, in x.x.x.x:x or [x:x:x:x::x]:x format
+comp_help: The admin bind address determines the IP address and port that the cjdns admin port listens on. Unless you have a specific requirement to connect to the cjdns admin port from other hosts, you should leave this as the default listening on 127.0.0.1 or [::]. A port number is chosen based on the tun interface number.
 val_help: txt; Bind address
 
 priority: 999

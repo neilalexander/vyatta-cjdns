@@ -1,1 +1,2 @@
 help: Firewall options
+comp_help: Firewall policies which should apply to the cjdns interface. These rules apply both to standard cjdns IPv6 traffic, and also to iptunnel IPv4 and IPv6 traffic. The "local ipv6-name" chains will be triggered by traffic sent to your cjdns IPv6 address.

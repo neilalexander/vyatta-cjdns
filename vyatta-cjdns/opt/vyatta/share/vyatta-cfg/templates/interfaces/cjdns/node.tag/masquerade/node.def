@@ -1,1 +1,2 @@
 help: Configure IPv6 masquerade/NAT
+comp_help: IPv6 Masquerade allows other IPv6 hosts on your network to send traffic through the cjdns interface by using NAT66. All traffic going through the IPv6 masquerade will appear as if it is originating from your cjdns IPv6 address, and return traffic will be translated automatically. 

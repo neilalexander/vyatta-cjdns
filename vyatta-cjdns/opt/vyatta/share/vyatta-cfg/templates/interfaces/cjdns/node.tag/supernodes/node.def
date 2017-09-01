@@ -1,0 +1,10 @@
+multi:
+type: txt
+help: Define which supernodes should be used
+comp_help: Specifies which supernodes should be used for v20 routing lookups. If not specified, supernodes will be learned automatically from your peers.
+val_help: txt; Public key of supernode (52 characters, followed by .k))
+
+create: /opt/vyatta/sbin/vyatta-cjdns-updateconf $VAR(../@) addSupernode $VAR(@)
+update: /opt/vyatta/sbin/vyatta-cjdns-updateconf $VAR(../@) deleteSupernode $VAR(@)
+
+syntax:expression: pattern $VAR(@) "^[0-9a-zA-Z]{52}\.k$"; "Public key must be 52 characters followed by .k"

@@ -1,6 +1,6 @@
 type: ipv6
-help: cjdns IPv6 address
-val_help: ipv6; cjdns IPv6 address
+help: Your cjdns IPv6 address, which is tied to your public key
+val_help: ipv6; IPv6 address in fc00::/8
 
 priority: 999
 

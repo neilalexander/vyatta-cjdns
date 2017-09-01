@@ -1,5 +1,6 @@
 type: txt
 help: Login name (optional)
+comp_help: The username that cjdns will use to establish a connection with your peer.
 val_help: txt; Login
 
 create: /opt/vyatta/sbin/vyatta-cjdns-updateconf $VAR(../../../@) updateUDPConnectToLogin $VAR(../../@) $VAR(../@) $VAR(@)

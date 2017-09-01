@@ -2,6 +2,7 @@ tag:
 type: u32
 help: UDP interface number (must start at ZERO)
 val_help: u32; UDP interface number
+comp_help: The logical number of your UDP interface. This always starts at 0, and subsequent interfaces should be numbered sequentially. For example, you may have an IPv4 UDP interface as 0 and an IPv6 UDP interface as 1. Multiple UDP interfaces can also be specified in order to listen on specific IP addresses.
 
 create: /opt/vyatta/sbin/vyatta-cjdns-updateconf $VAR(../@) addUDPInterface $VAR(@)
 update: /opt/vyatta/sbin/vyatta-cjdns-updateconf $VAR(../@) addUDPInterface $VAR(@)

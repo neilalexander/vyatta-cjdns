@@ -1,5 +1,6 @@
 type: ipv4net
 help: Provide IPv4 prefix to remote client
+comp_help: Specify which IPv4 prefixes you wish to provide to your remote peer. The remote side must be configured to receive prefixes from your public key.
 val_help: ipv4net; IPv4 prefix to provide to remote client
 
 create: /opt/vyatta/sbin/vyatta-cjdns-updateconf $VAR(../../@) addIpTunnelProviderIPv4Prefix $VAR(../@) $VAR(@)

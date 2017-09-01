@@ -1,4 +1,5 @@
 help: Connect to remote provider
+comp_help: Set this flag to receive IPv4 or IPv6 IP Tunnel prefixes from your peer.
 
 create: /opt/vyatta/sbin/vyatta-cjdns-updateconf $VAR(../../@) addIpTunnelConnectTo $VAR(../@)
 delete: /opt/vyatta/sbin/vyatta-cjdns-updateconf $VAR(../../@) deleteIpTunnelConnectTo $VAR(../@)

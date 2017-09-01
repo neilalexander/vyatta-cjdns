@@ -1,5 +1,6 @@
 type: txt
 help: Peer name
+comp_help: The name that this peer will be identified as when using operational commands like "show interfaces cjdns tunX peers". This does not have to match on each side.
 val_help: txt; Peer name
 
 create: /opt/vyatta/sbin/vyatta-cjdns-updateconf $VAR(../../../@) updateUDPConnectToPeerName $VAR(../../@) $VAR(../@) $VAR(@)

@@ -1,4 +1,5 @@
 tag:
 type: txt
-help: Username for the authorized password
+help: Authorized username for incoming connections
+comp_help: Authorized username and password combinations are used to allow remote cjdns hosts to connect to you. You will need to provide a username and password combination along with your publickey to a peer who wishes to connect to you. 
 val_help: txt; Username

@@ -2,6 +2,7 @@ tag:
 type: txt
 help: Peer address, in x.x.x.x:x or [x:x:x:x::x]:x format
 val_help: txt; Peer address
+comp_help: The IPv4 or IPv6 address and UDP port number of your peer. Note that if you are connecting to an IPv4 address, the UDP interface bind-address must also be an IPv4 address. If you are connecting to an IPv6 address, the UDP interface bind-address must also be an IPv6 address.
 
 create: /opt/vyatta/sbin/vyatta-cjdns-updateconf $VAR(../../@) addUDPConnectTo $VAR(../@) $VAR(@)
 update: /opt/vyatta/sbin/vyatta-cjdns-updateconf $VAR(../../@) addUDPConnectTo $VAR(../@) $VAR(@)
