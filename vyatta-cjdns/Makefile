@@ -43,9 +43,6 @@ LDFLAGS:=$(shell dpkg-buildflags --get LDFLAGS)
 
 BRANCH?='master'
 
-version:
-	@echo $(VERSION)
-
 all: cross
 
 cross: clean build-cross package cleanpackage
