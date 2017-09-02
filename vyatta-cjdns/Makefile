@@ -30,12 +30,21 @@ BUILDDIR_CJD=/tmp/cjdns
 
 PREFIX?='mipsel-linux-gnu-'
 PKGARCH?=$(shell dpkg --print-architecture)
-VERSION=$(shell printf "0.1.%s" `git rev-list --count HEAD 2>/dev/null || echo 0`)
+RELEASE=0.1
+BUILDNUMBER=$(shell git rev-list v$(RELEASE)..HEAD --count 2>/dev/null || echo 0)
+ifeq ($(BUILDNUMBER),0)
+VERSION=$(RELEASE)
+else
+VERSION=$(RELEASE).$(shell echo $(BUILDNUMBER)+1 | bc)
+endif
 
 CFLAGS:=$(shell dpkg-buildflags --get CFLAGS)
 LDFLAGS:=$(shell dpkg-buildflags --get LDFLAGS)
 
 BRANCH?='master'
+
+version:
+	@echo $(VERSION)
 
 all: cross
 
