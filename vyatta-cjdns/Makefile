@@ -19,6 +19,7 @@
 #
 
 PACKAGE=vyatta-cjdns
+RELEASE=0.1
 
 DESTDIR=/opt/vyatta
 
@@ -30,7 +31,6 @@ BUILDDIR_CJD=/tmp/cjdns
 
 PREFIX?='mipsel-linux-gnu-'
 PKGARCH?=$(shell dpkg --print-architecture)
-RELEASE=0.1
 BUILDNUMBER=$(shell git rev-list v$(RELEASE)..HEAD --count 2>/dev/null || echo 0)
 ifeq ($(BUILDNUMBER),0)
 VERSION=$(RELEASE)
@@ -58,7 +58,6 @@ package:
 	cd debian && tar czvf ../../control.tar.gz *
 	echo 2.0 > ../debian-binary
 	ar -r ../$(PACKAGE)-$(VERSION)-$(PKGARCH).deb ../debian-binary ../control.tar.gz ../data.tar.gz
-	ln -fs ../$(PACKAGE)-$(VERSION)-$(PKGARCH).deb ../$(PACKAGE).deb
 
 cleanpackage:
 	rm ../debian-binary

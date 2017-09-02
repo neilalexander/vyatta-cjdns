@@ -40,9 +40,9 @@ Alternatively, clone and compile the `crashey` branch:
 cd vyatta-cjdns
 PREFIX='mipsel-linux-gnu-' PKGARCH='mipsel' BRANCH=crashey make -e
 ```
-The package `vyatta-cjdns.deb` will be created in the parent directory. Copy it to the EdgeRouter and install it:
+The package `vyatta-cjdns-x.x.x-xxxxxx.deb` will be created in the parent directory. Copy it to the EdgeRouter and install it:
 ```
-sudo dpkg -i vyatta-cjdns.deb
+sudo dpkg -i vyatta-cjdns-x.x.x-xxxxxx.deb
 ```
 
 ### Manually Building for EdgeRouter Lite
@@ -72,9 +72,9 @@ Alternatively, clone and compile the `crashey` branch:
 cd vyatta-cjdns
 PREFIX='mips-mti-linux-gnu-' PKGARCH='mips' BRANCH=crashey make -e
 ```
-The package `vyatta-cjdns.deb` will be created in the parent directory. Copy it to the EdgeRouter and install it:
+The package `vyatta-cjdns-x.x.x-xxxxxx.deb` will be created in the parent directory. Copy it to the EdgeRouter and install it:
 ```
-sudo dpkg -i vyatta-cjdns.deb
+sudo dpkg -i vyatta-cjdns-x.x.x-xxxxxx.deb
 ```
 
 ### Manually Building for VyOS 1.1.7
@@ -108,7 +108,7 @@ Alternatively, clone and compile the `crashey` branch:
 cd vyatta-cjdns
 make native BRANCH=crashey
 ```
-The package `vyatta-cjdns.deb` will be created in the parent directory. Copy it to the VyOS router and install it:
+The package `vyatta-cjdns-x.x.x-xxxxxx.deb` will be created in the parent directory. Copy it to the VyOS router and install it:
 ```
-sudo dpkg -i vyatta-cjdns.deb
+sudo dpkg -i vyatta-cjdns-x.x.x-xxxxxx.deb
 ```

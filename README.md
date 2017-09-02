@@ -2,9 +2,7 @@
 
 ### Introduction
 
-This is a cjdns distributable package for Ubiquiti EdgeOS, VyOS and potentially other Vyatta-based systems. It supports configuration through the standard configuration editor and should therefore be very straight-forward to deploy.
-
-At this time this package is in very early stages of development, but the ultimate aim is to provide binary builds for some commonly-used platforms with pre-built cjdns binaries.
+The `vyatta-cjdns` package provides cjdns support on supported Ubiquiti EdgeMAX, VyOS and potentially other Vyatta-based routers.  It is integrated with the command line interface (CLI) allowing cjdns to be configured through the standard configuration system.
 
 ### Compatibility
 
@@ -14,11 +12,15 @@ At this time this package is in very early stages of development, but the ultima
 | EdgeRouter Lite (ERL) |    mips64    |     Yes    |                                                               |
 |       VyOS 1.1.x      | i386, amd64  |     Yes    | No support for IPv6 masquerade                                |
 
-### Installation
+### Install / Upgrade
 
-Either download or build a release and copy it to the router, then install it:
+Either download or build a release and copy it to the router, then install/upgrade it:
 ```
 sudo dpkg -i vyatta-cjdns-x.x.x-xxxxxx.deb
+```
+If you are upgrading from a previous release of `vyatta-cjdns`, then restart cjdns once the upgraded package is installed:
+```
+restart cjdns tun0
 ```
 
 ### Configuration
@@ -82,6 +84,7 @@ commit
 
 An example stateful firewall configuration that will block unexpected incoming traffic on the cjdns interface, i.e. to prevent other people from reaching your ssh or Web UI ports:
 ```
+configure
 set firewall ipv6-name CJD_LOCAL default-action drop
 set firewall ipv6-name CJD_LOCAL rule 10 action accept
 set firewall ipv6-name CJD_LOCAL rule 10 state established enable
@@ -89,6 +92,7 @@ set firewall ipv6-name CJD_LOCAL rule 10 state related enable
 set firewall ipv6-name CJD_LOCAL rule 20 action drop
 set firewall ipv6-name CJD_LOCAL rule 20 state invalid enable
 set interfaces cjdns tun0 firewall local ipv6-name CJD_LOCAL
+configure
 ```
 
 #### Masquerade
@@ -150,23 +154,6 @@ set system task-scheduler task check-cjdns executable path /opt/vyatta/sbin/vyat
 set system task-scheduler task check-cjdns interval 1m
 commit
 ```
-
-### Manual Configuration
-
-If you prefer not to make use of the EdgeRouter CLI to manage `cjdroute.conf`, or you prefer to use another utility to manage `cjdroute.conf`, it is still possible to use the vyatta-cjdns package, with the following caveats:
-
-- The interface will not be recognised by the EdgeRouter GUI, or by operational commands in the CLI such as `show interfaces`
-- It may not be possible to configure firewall rules or other services for the cjdns interface using the EdgeRouter GUI or CLI as a result
-- If you are not careful, the EdgeRouter GUI or CLI may allow you to incorrectly define a different tunnel interface using the same `tunX` name as the cjdns tunnel
-- If a cjdns tunnel is defined later in the EdgeRouter GUI or CLI with the same `tunX` name, the configuration may be overwritten partially or entirely
-
-To generate the configuration, choose a `tunX` interface which is not in use by anything else on the system, and then generate the config into `/config/cjdroute.tunX.conf`, uncommenting and amending the `tunDevice` directive in the config file to always use the chosen `tunX` interface. For example, to use `tun1`:
-```
-/opt/vyatta/sbin/cjdroute --genconf > /config/cjdroute.tun1.conf
-sed -i 's/\/\/"tunDevice": "tun0"/"tunDevice": "tun1"/' /config/cjdroute.tun1.conf
-restart cjdns tun1
-```
-Use the Crash Detection scheduled task above to automatically check and start cjdns on a given interval, as it will not be automatically started by the EdgeRouter configuration system when using this method.
 
 ### Footnotes
 
