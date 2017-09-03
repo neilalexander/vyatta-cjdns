@@ -19,7 +19,7 @@
 #
 
 PACKAGE=vyatta-cjdns
-RELEASE=0.1
+RELEASE=0.2
 
 DESTDIR=/opt/vyatta
 
