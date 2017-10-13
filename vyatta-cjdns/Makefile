@@ -59,7 +59,7 @@ build-native: cjdnsclone cjdnsbuild-native cjdnsstage
 
 package:
 	sed -i "s/^Architecture: .*/Architecture: $(PKGARCH)/" debian/control
-	sed -i "s/^Version: .*/Version: $(VERSION)/" debian/control
+	sed -i "s/^Version: .*/Version: $(VERSION)$(BRANCHTAG)/" debian/control
 	tar czvf ../data.tar.gz opt
 	cd debian && tar czvf ../../control.tar.gz *
 	echo 2.0 > ../debian-binary
