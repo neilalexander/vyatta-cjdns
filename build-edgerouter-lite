@@ -42,6 +42,7 @@ fi
 PATH=/opt/mips-mti-linux-gnu/2015.06-05/bin:$PATH
 
 echo "Building vyatta-cjdns..."
+BRANCH=$1; [ -z "${BRANCH}" ] && BRANCH=master
 cd vyatta-cjdns && \
-    PREFIX='mips-mti-linux-gnu-' PKGARCH='mips' make cross -e && \
+    PREFIX='mips-mti-linux-gnu-' PKGARCH='mips' BRANCH=${BRANCH} make cross -e && \
     cd ..

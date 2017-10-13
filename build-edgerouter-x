@@ -55,6 +55,7 @@ then
 fi
 
 echo "Building vyatta-cjdns..."
+BRANCH=$1; [ -z "${BRANCH}" ] && BRANCH=master
 cd vyatta-cjdns && \
-    PREFIX='mipsel-linux-gnu-' PKGARCH='mipsel' CROSS_CFLAGS="-mips32r2 -march=1004kc -mhard-float" make cross -e && \
+    PREFIX='mipsel-linux-gnu-' PKGARCH='mipsel' CROSS_CFLAGS="-mips32r2 -march=1004kc -mhard-float" BRANCH=${BRANCH} make cross -e && \
     cd ..

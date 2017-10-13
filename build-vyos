@@ -63,6 +63,7 @@ then
 fi
 
 echo "Building vyatta-cjdns..."
+BRANCH=$1; [ -z "${BRANCH}" ] && BRANCH=master
 cd vyatta-cjdns && \
-    make native && \
+    BRANCH=${BRANCH} make native && \
     cd ..

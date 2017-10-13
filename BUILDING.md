@@ -16,6 +16,12 @@ Use the provided shell scripts, which will do most of the hard work for you:
 ./build-edgerouter-lite
 ./build-vyos
 ```
+To build a different cjdns branch, specify it as the first parameter, i.e. to build `crashey`:
+```
+./build-edgerouter-x crashey
+./build-edgerouter-lite crashey
+./build-vyos crashey
+```
 
 ### Manually Building for EdgeRouter X
 

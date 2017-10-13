@@ -45,6 +45,9 @@ CFLAGS:=$(shell dpkg-buildflags --get CFLAGS)
 LDFLAGS:=$(shell dpkg-buildflags --get LDFLAGS)
 
 BRANCH?='master'
+ifneq ($(BRANCH),master)
+BRANCHTAG=-$(BRANCH)
+endif
 
 all: cross
 
@@ -60,7 +63,7 @@ package:
 	tar czvf ../data.tar.gz opt
 	cd debian && tar czvf ../../control.tar.gz *
 	echo 2.0 > ../debian-binary
-	ar -r ../$(PACKAGE)-$(VERSION)-$(PKGARCH).deb ../debian-binary ../control.tar.gz ../data.tar.gz
+	ar -r ../$(PACKAGE)-$(VERSION)$(BRANCHTAG)-$(PKGARCH).deb ../debian-binary ../control.tar.gz ../data.tar.gz
 
 cleanpackage:
 	rm ../debian-binary
