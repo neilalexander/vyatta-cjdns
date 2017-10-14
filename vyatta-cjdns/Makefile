@@ -35,10 +35,11 @@ CROSS_LDFLAGS?=''
 
 PKGARCH?=$(shell dpkg --print-architecture)
 BUILDNUMBER=$(shell git rev-list v$(RELEASE)..HEAD --count 2>/dev/null || echo 0)
+REPOBUILDNUMBER=$(shell cd $(BUILDDIR_CJD) && git rev-list HEAD --count 2>/dev/null || 0)
 ifeq ($(BUILDNUMBER),0)
-VERSION=$(RELEASE)
+VERSION=$(RELEASE)-$(shell echo $(REPOBUILDNUMBER) | xargs printf "%04d")
 else
-VERSION=$(RELEASE).$(shell echo $(BUILDNUMBER) | bc)
+VERSION=$(RELEASE).$(shell echo $(BUILDNUMBER) | bc)-$(shell echo $(REPOBUILDNUMBER) | xargs printf "%04d")
 endif
 
 CFLAGS:=$(shell dpkg-buildflags --get CFLAGS)
