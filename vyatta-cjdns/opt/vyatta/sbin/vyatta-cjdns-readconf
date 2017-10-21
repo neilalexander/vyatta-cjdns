@@ -36,7 +36,7 @@ except:
             data = json.load(data_file)
     except:
         print "Unable to parse " + configfile + " - file malformed?"
-        exit -1
+        sys.exit(-1)
     else:
         os.system("mv " + configfile + ".tmp " + configfile)
 
@@ -60,6 +60,23 @@ def showIdentity():
     print "Public key: " + data['publicKey']
     print "Private key: " + data['privateKey']
 
+def showConnectionUsernames():
+	for block in data['authorizedPasswords']:
+		print block['user']
+
+def showConnectionDetails(user):
+	for block in data['authorizedPasswords']:
+		if block['user'] == user:
+			for bind in data['interfaces']['UDPInterface']:
+				if bind['bind'] == "": continue
+				print '"{}":'.format(bind['bind']), '{'
+				print '    "publicKey": "{}",'.format(data['publicKey'])
+				print '    "login": "{}",'.format(block['user'])
+				print '    "password": "{}"'.format(block['password'])
+				print '}'
+			return
+	print "No such user found"
+	
 try:
     if sys.argv[2] == "getAdminAddress": getAdminAddress()
     if sys.argv[2] == "getAdminPassword": getAdminPassword()
@@ -67,5 +84,7 @@ try:
     if sys.argv[2] == "getPrivateKey": getPrivateKey()
     if sys.argv[2] == "getIPv6Address": getIPv6Address()
     if sys.argv[2] == "showIdentity": showIdentity()
+    if sys.argv[2] == "showConnectionUsernames": showConnectionUsernames()
+    if sys.argv[2] == "showConnectionDetails": showConnectionDetails(sys.argv[3])
 except IndexError:
     print "Incorrect number of parameters supplied"
