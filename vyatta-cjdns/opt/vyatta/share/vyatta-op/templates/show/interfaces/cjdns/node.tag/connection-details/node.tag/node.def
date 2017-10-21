@@ -1,3 +1,4 @@
+tag:
 allowed: /opt/vyatta/sbin/vyatta-cjdns-readconf $4 showConnectionUsernames
 run: /opt/vyatta/sbin/vyatta-cjdns-readconf $4 showConnectionDetails $6
 help: Show connection details for a given username

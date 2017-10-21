@@ -65,18 +65,23 @@ def showConnectionUsernames():
 		print block['user']
 
 def showConnectionDetails(user):
+	listedPorts = []
 	for block in data['authorizedPasswords']:
 		if block['user'] == user:
 			for bind in data['interfaces']['UDPInterface']:
 				if bind['bind'] == "": continue
-				print '"{}":'.format(bind['bind']), '{'
+				tokens = bind['bind'].split(":")
+				if len(tokens) < 2: continue
+				if tokens[1] in listedPorts: continue
+				listedPorts += tokens[1]
+				print '"ip-address:{}":'.format(tokens[-1]),  '{'
 				print '    "publicKey": "{}",'.format(data['publicKey'])
 				print '    "login": "{}",'.format(block['user'])
 				print '    "password": "{}"'.format(block['password'])
 				print '}'
 			return
 	print "No such user found"
-	
+
 try:
     if sys.argv[2] == "getAdminAddress": getAdminAddress()
     if sys.argv[2] == "getAdminPassword": getAdminPassword()
