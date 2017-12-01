@@ -1,8 +1,10 @@
 type: txt
 help: Description
 
+priority: 999
+
 syntax:expression: pattern $VAR(@) "^.{1,256}$" \
 	; "interface description is too long (limit 256 characters)"
 
-update: sudo sh -c "echo \"$VAR(@)\" >/sys/class/net/$VAR(../@)/ifalias"
-delete: sudo sh -c "echo '' >/sys/class/net/$VAR(../@)/ifalias"
+update: sudo sh -c "if [ -f /sys/class/net/$VAR(../@)/ifalias ]; then echo \"$VAR(@)\" >/sys/class/net/$VAR(../@)/ifalias; fi"
+delete: sudo sh -c "if [ -f /sys/class/net/$VAR(../@)/ifalias ]; then echo '' >/sys/class/net/$VAR(../@)/ifalias; fi"
