@@ -155,6 +155,38 @@ set system task-scheduler task check-cjdns interval 1m
 commit
 ```
 
+### Upgrading EdgeOS ###
+
+When EdgeOS is upgraded, `vyatta-cjdns` will be uninstalled and, as a result, the cjdns interface configuration will be missing from the *running* configuration after upgrade. In order to preserve your `vyatta-cjdns` configuration through a system upgrade, use the following steps.
+
+Before upgrading EdgeOS, make sure to save your running configuration to storage:
+```
+configure
+save
+```
+Download a backup of your configuration from the router and then upgrade EdgeOS.
+
+Once the EdgeRouter has come back up, you must reinstall `vyatta-cjdns` and then reload the *saved* configuration from storage:
+```
+sudo dpkg -i vyatta-cjdns...
+configure
+load
+compare
+```
+If at this point your `interfaces cjdns` configuration is displayed, then `commit` to make it effective:
+```
+commit
+```
+If you do not see your `interfaces cjdnss` configuration at this point, then restore from your previously backed up configuration.
+
+**WARNING:** Do not issue the `save` command at any point after the system upgrade **UNTIL** you are happy that your cjdns configuration has been successfully committed, otherwise it may be lost. 
+
+Verify that `cjdroute` is running again:
+```
+ps -ef | grep cjdroute
+show interfaces cjdns tunX peers
+```
+
 ### Footnotes
 
 If cjdns fails to start, you can find logging output in `/tmp/cjdroute.tunX.log`, where `tunX` is the specified interface.
