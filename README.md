@@ -179,7 +179,7 @@ commit
 ```
 If you do not see your `interfaces cjdns` configuration at this point, then restore from your previously backed up configuration.
 
-**WARNING:** Do not issue the `save` command at any point after the system upgrade or make any other configuration changes at. all **UNTIL** you are happy that your cjdns configuration has been successfully committed, otherwise it may be lost.
+**WARNING:** Do not issue the `save` command at any point after the system upgrade or make any other configuration changes at all **UNTIL** you are happy that your cjdns configuration has been successfully committed, otherwise it may be lost.
 
 Verify that `cjdroute` is running again, in operational view:
 ```
