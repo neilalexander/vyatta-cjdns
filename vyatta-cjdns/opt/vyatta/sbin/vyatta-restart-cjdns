@@ -18,7 +18,7 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 
-if [ -n $1 ];
+if [ ! -z $1 ];
 then
     if [ `cat /var/run/cjdroute.$1.pid 2>/dev/null | wc -l` -gt 0 ];
     then
@@ -38,15 +38,18 @@ then
 else
     if [ `pgrep cjdroute 2>/dev/null | wc -l` -gt 0 ];
     then
-        echo -n "Stopping running cjdns interfaces... "
-        cat /var/run/cjdroute.*.pid 2>/dev/null | xargs kill -P 2&>1
-        if [ $? -eq 0 ]; then rm -f /var/run/cjdroute.*.pid &>/dev/null; echo "OK.";
-        else rm -f /var/run/cjdroute.$1.pid &>/dev/null; echo "failed."; fi
+        ls /var/run/cjdroute.*.pid | awk -v FS="(cjdroute.|.pid)" '{print $2}' | while read pid;
+        do
+            echo -n "Stopping running cjdns interface $pid... "
+            pkill -P `cat /var/run/cjdroute.$pid.pid`
+	    if [ $? -eq 0 ]; then rm -f /var/run/cjdroute.*.pid &>/dev/null; echo "OK.";
+	    else rm -f /var/run/cjdroute.$1.pid &>/dev/null; echo "failed."; fi
+        done
     fi
 
     if [ `ls /config/cjdroute.*.conf 2>/dev/null | wc -l` -gt 0 ];
     then
-        ls /config/cjdroute.*.conf | awk -v FS="(cjdroute.|.conf)" '{print $2}' | while read file;
+        ls /config/cjdroute.*.conf | awk -v FS="(cjdroute.|.conf)" '{print $3}' | while read file;
         do
             echo -n "Starting cjdns interface $file... "
             nohup nice -5 /opt/vyatta/sbin/cjdroute --nobg &>/tmp/cjdroute.$1.log < /config/cjdroute.$file.conf &
