@@ -32,14 +32,14 @@ then
 fi
 
 echo "Checking if Codescape GNU Tools Package for MIPS is in /opt..."
-if [ ! -d "/opt/mips-mti-linux-gnu/2015.06-05/" ];
+if [ ! -d "/opt/mips-mti-linux-gnu/2017.10-05/" ];
 then
     echo "Downloading and unpacking Codescape GNU Tools Package for MIPS into /opt"
-    wget -P /tmp http://codescape-mips-sdk.imgtec.com/components/toolchain/2015.06-05/Codescape.GNU.Tools.Package.2015.06-05.for.MIPS.MTI.Linux.CentOS-5.x86_64.tar.gz
-    sudo tar -zxf /tmp/Codescape.GNU.Tools.Package.2015.06-05.for.MIPS.MTI.Linux.CentOS-5.x86_64.tar.gz -C /opt
+    wget -P /tmp https://codescape.mips.com/components/toolchain/2017.10-05/Codescape.GNU.Tools.Package.2017.10-05.for.MIPS.MTI.Linux.CentOS-5.x86_64.tar.gz
+    sudo tar -zxf /tmp/Codescape.GNU.Tools.Package.2017.10-05.for.MIPS.MTI.Linux.CentOS-5.x86_64.tar.gz -C /opt
 fi
 
-PATH=/opt/mips-mti-linux-gnu/2015.06-05/bin:$PATH
+PATH=/opt/mips-mti-linux-gnu/2017.10-05/bin:$PATH
 
 echo "Building vyatta-cjdns..."
 BRANCH=$1; [ -z "${BRANCH}" ] && BRANCH=master
